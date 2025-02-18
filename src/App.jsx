@@ -8,6 +8,12 @@ import ContactUs from "./contactus";
 import SignUpPage from "./signup";
 import AdminDashboard from "./admin";
 import UserProfile from "./userprofile";
+import Dashboard from "./newcomer";
+import TaxPaymentForm from "./paymentform";
+import PaymentSuccess from "./payss";
+import TaxOptions from "./taxoption";
+
+
 
 
 
@@ -28,7 +34,12 @@ function App() {
           <Route path = "newuser" element={<SignUpPage />}/> 
           <Route path = "admin" element={<AdminDashboard />}/> 
           <Route path = "userprofile" element={<UserProfile/>}/> 
-
+          <Route path = "newcomer" element={<Dashboard/>}/> 
+          <Route path = "newlogin" element={<AdminDashboard/>}/> 
+          <Route path = "paysubmit" element={<TaxPaymentForm/>}/> 
+          <Route path = "Payss" element={<PaymentSuccess/>}/> 
+          <Route path = "home" element={<Home/>}/> 
+          <Route path = "taxoption" element={<TaxOptions/>}/> 
 
         </Routes>
         < Footer />

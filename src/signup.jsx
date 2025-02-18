@@ -93,9 +93,9 @@ function SignUpPage() {
                 </label>
               </div>
   
-              <button className="w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+              <Link to ="/newcomer"className="w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                 Register Here
-              </button>
+              </Link>
             </div>
   
             {/* Links */}

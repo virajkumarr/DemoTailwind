@@ -59,9 +59,9 @@ function Navbar() {
           <Link to="about" className="hover:text-blue-600">
             About
           </Link>
-          <a href="#" className="hover:text-blue-600">
+          <Link to ="taxoption" href="#" className="hover:text-blue-600">
             Tax Beneficiary ▼
-          </a>
+          </Link>
           <a href="#" className="hover:text-blue-600">
             More ▼
           </a>

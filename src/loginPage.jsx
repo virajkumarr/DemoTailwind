@@ -52,9 +52,9 @@ function LoginPage() {
                 </label>
               </div>
   
-              <button className="w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+              <Link to= "/newlogin"className="w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                 Login Here
-              </button>
+              </Link>
             </div>
   
           

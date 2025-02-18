@@ -37,6 +37,7 @@ function Home() {
             Your Tax Filing Is The Key <br /> To Your Financial Goal
           </h1>
           <p className="text-gray-700 text-lg mt-4">Lets Do It Together ...</p>
+          <br />
           
           {/* Call-to-Action Button */}
           <Link to ="admin" className="mt-6 bg-red-500 text-white px-6 py-3 text-lg rounded-lg shadow-md hover:bg-red-600 transition">

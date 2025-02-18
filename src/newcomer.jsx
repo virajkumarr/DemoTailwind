@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 const Dashboard = () => {
@@ -42,7 +43,7 @@ const Dashboard = () => {
         </div>
         <div className="mt-4">
           <h2 className="text-lg font-semibold">File Your Tax:</h2>
-          <button className="bg-red-500 text-white px-4 py-2 rounded mt-2">Let’s Get Started</button>
+          <Link to ="/paysubmit" className="bg-red-500 text-white px-4 py-2 rounded mt-2">Let’s Get Started</Link>
         </div>
         <div className="grid grid-cols-3 gap-4 mt-6">
           <img src="../public/tax1.jpeg" alt="Tax" className="rounded-lg shadow-md" />
