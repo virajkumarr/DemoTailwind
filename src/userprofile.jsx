@@ -1,6 +1,6 @@
 const UserProfile = () => {
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="mt-30 flex h-screen bg-gray-100">
       {/* Sidebar */}
       <div className="w-64 bg-white p-6 shadow-md">
         <div className="flex items-center space-x-3">

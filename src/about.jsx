@@ -28,7 +28,7 @@ function About() {
       <div className="bg-white text-black py-16">
          <div className="bg-gradient-to-r from-blue-900 to-blue-700 text-white p-8">
       
-      <h1 className="text-4xl font-bold mb-6">About</h1>
+      <h1 className=" mt-10 text-4xl font-bold mb-6">About</h1>
 
       <div className="bg-blue-900 p-6 rounded-lg shadow-lg">
        

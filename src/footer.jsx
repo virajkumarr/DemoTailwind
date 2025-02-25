@@ -1,65 +1,67 @@
+import { FaFacebookF, FaTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa";
+
 const Footer = () => {
-    return (
-      <footer className="bg-white shadow-md p-8">
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 text-gray-700">
-          
-          {/* Left Section - Logo & Contact */}
-          <div className="flex flex-col items-center md:items-start">
-            <img
-              src="../public/img2.jpeg" // Replace with actual logo URL
-              alt="Liberty Tax"
-              className="w-32 mb-4"
-            />
-            <p className="flex items-center space-x-2">
-              <span>📞</span> 
-              <a href="tel:+917600300778" className="hover:underline">
-                +91 7600300778
-              </a>
-            </p>
-            <p className="flex items-center space-x-2">
-              <span>🌐</span> 
-              <a href="https://www.libertytax.com" target="_blank" className="hover:underline">
-                www.libertytax.com
-              </a>
-            </p>
-            <p className="flex items-center space-x-2">
-              <span>✉️</span> 
-              <a href="mailto:info@libertytax.com" className="hover:underline">
-                info@libertytax.com
-              </a>
-            </p>
+  return (
+    <footer className="bg-gray-100 shadow-lg border-t border-gray-300 p-10">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+        
+        {/* Left Section - Logo & Contact in Same Row */}
+        <div className="flex flex-col items-center md:items-start">
+          <img
+            src="/img2.jpeg"
+            alt="Liberty Tax"
+            className="w-32 mb-4 rounded-lg shadow-md"
+          />
+          <div className="flex flex-col space-y-1 text-gray-700">
+            <p>📞 <a href="tel:+917600300778" className="hover:text-blue-500">+91 7600300778</a></p>
+            <p>🌐 <a href="https://www.libertytax.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-500">www.libertytax.com</a></p>
+            <p>✉️ <a href="mailto:info@libertytax.com" className="hover:text-blue-500">info@libertytax.com</a></p>
           </div>
-  
-          {/* Middle Section - Services & Contact */}
-          <div className="text-center">
-            <h3 className="text-lg font-semibold">Services Links</h3>
-            <ul className="space-y-2 mt-2">
-              <li><a href="#" className="hover:underline">Liberty Opportunities</a></li>
-              <li><a href="#" className="hover:underline">About Us</a></li>
-              <li><a href="#" className="hover:underline">Contact Us</a></li>
-            </ul>
-            
-            
-            <div><h3 className="text-lg font-semibold mt-6">Contact Us</h3>
-            <p>📍 9th Street Sinkor, 1000 Monrovia 10 Liberia</p>
-            <p>⏰ 9:00 AM - 5:00 PM, Sat - Thu</p></div>
-          </div>
-  
-          {/* Right Section - Support & Social Media */}
-          <div className="text-center">
-            <h3 className="text-lg font-semibold">For any kind of Support</h3>
-            <div className="flex justify-center space-x-4 mt-2 text-xl">
-              <a href="#" className="hover:text-blue-600">📘</a> {/* Facebook */}
-              <a href="#" className="hover:text-blue-500">✖️</a> {/* X (Twitter) */}
-              <a href="#" className="hover:text-pink-500">📸</a> {/* Instagram */}
-              <a href="#" className="hover:text-green-500">💬</a> {/* WhatsApp */}
-            </div>
-          </div>
-  
         </div>
-      </footer>
-    );
-  };
-  
-  export default Footer;
-  
+
+        {/* Middle Section - Services & Contact */}
+        <div className="text-gray-800">
+          <h3 className="text-xl font-semibold text-blue-700">Services</h3>
+          <ul className="space-y-2 mt-2">
+            <li><a href="#" className="hover:text-blue-500">Liberty Opportunities</a></li>
+            <li><a href="#" className="hover:text-blue-500">About Us</a></li>
+            <li><a href="#" className="hover:text-blue-500">Contact Us</a></li>
+          </ul>
+          
+          <div className="mt-6">
+            <h3 className="text-xl font-semibold text-blue-700">Contact Us</h3>
+            <p>📍 9th Street Sinkor, 1000 Monrovia 10, Liberia</p>
+            <p>⏰ 9:00 AM - 5:00 PM, Sat - Thu</p>
+          </div>
+        </div>
+
+        {/* Right Section - Support & Social Media */}
+        <div className="text-gray-800">
+          <h3 className="text-xl font-semibold text-blue-700">Need Support?</h3>
+          <div className="flex justify-center md:justify-start space-x-6 mt-4 text-2xl text-gray-600">
+            <a href="#" className="hover:text-blue-600 transition duration-300">
+              <FaFacebookF />
+            </a>
+            <a href="#" className="hover:text-blue-400 transition duration-300">
+              <FaTwitter />
+            </a>
+            <a href="#" className="hover:text-pink-400 transition duration-300">
+              <FaInstagram />
+            </a>
+            <a href="#" className="hover:text-green-500 transition duration-300">
+              <FaWhatsapp />
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Bottom Footer */}
+      <div className="text-center text-sm mt-6 border-t border-gray-300 pt-4 text-gray-700">
+        © {new Date().getFullYear()} Liberty Tax. All Rights Reserved.
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

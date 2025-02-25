@@ -2,7 +2,7 @@
 
 function ContactUs() {
   return (
-    <div className="bg-gray-900 text-white min-h-screen flex justify-center items-center p-8">
+    <div className="mt-20 bg-gray-900 text-white min-h-screen flex justify-center items-center p-8">
       <div className="flex flex-col md:flex-row w-full max-w-5xl shadow-lg rounded-lg overflow-hidden">
         
         {/* Left Side - Contact Details */}

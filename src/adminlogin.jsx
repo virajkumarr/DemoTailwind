@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function LoginPage() {
+function AdminLoginPage() {
     return (
       <div className="mt-20 flex items-center justify-center min-h-screen bg-gray-100 p-4">
         <div className="flex bg-white shadow-lg rounded-2xl overflow-hidden max-w-4xl w-full">
@@ -52,24 +52,18 @@ function LoginPage() {
                 </label>
               </div>
   
-              <Link to= "/newlogin"className="w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                Login Here
+              <Link to= "/admin"className="w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+                Admin Login Here
               </Link>
             </div>
   
           
-            <div className="flex justify-between mt-4 text-sm text-gray-500">
-              <Link to="/newuser" className="hover:underline">
-                New User?
-              </Link>
-
             
-            </div>
           </div>
         </div>
       </div>
     )
   }
   
-  export default LoginPage;
+  export default AdminLoginPage;
   

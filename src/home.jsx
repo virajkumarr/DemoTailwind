@@ -40,7 +40,7 @@ function Home() {
           <br />
           
           {/* Call-to-Action Button */}
-          <Link to ="admin" className="mt-6 bg-red-500 text-white px-6 py-3 text-lg rounded-lg shadow-md hover:bg-red-600 transition">
+          <Link to ="/login" className="mt-6 bg-red-500 text-white px-6 py-3 text-lg rounded-lg shadow-md hover:bg-red-600 transition">
             File Your Taxes Online
           </Link>
         </div>
@@ -56,13 +56,13 @@ function Home() {
 
       </div>
     </div>
-         <div className="bg-gradient-to-r from-blue-900 to-blue-700 text-white p-8">
+         <div className=" bg-gradient-to-r from-blue-900 to-blue-700 text-white p-8">
       
-      <h1 className="text-4xl font-bold mb-6">About</h1>
+      <h1 className=" text-4xl font-bold mb-6">About</h1>
 
-      <div className="bg-blue-900 p-6 rounded-lg shadow-lg">
+      <div className=" bg-blue-900 p-6 rounded-lg shadow-lg">
        
-        <h2 className="text-3xl font-bold mb-4">About Us</h2>
+        <h2 className="mt-20 text-3xl font-bold mb-4">About Us</h2>
 
         <div className="flex flex-col md:flex-row">
         

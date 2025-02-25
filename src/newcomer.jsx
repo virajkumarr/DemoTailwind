@@ -1,59 +1,70 @@
 import { Link } from "react-router-dom";
 
-
 const Dashboard = () => {
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="mt-30 flex h-screen bg-gray-100">
+      
       {/* Sidebar */}
-      <div className="w-64 bg-white p-6 shadow-md">
-        {/* Logo and Contact */}
-        <div className="flex flex-col items-center mb-4">
-          <img src="../public/img2.jpeg" alt="Liberty Tax" className="w-32 mb-2" />
-          <p className="text-blue-600 font-bold">+917600300778</p>
+      <div className="w-72 bg-white p-6 shadow-lg border-r border-gray-200">
+        
+        {/* Logo & Contact */}
+        <div className="flex flex-col items-center mb-6">
+          <img src="/img2.jpeg" alt="Liberty Tax" className="w-28 rounded-lg shadow-md" />
+          <p className="text-blue-600 font-bold mt-2">📞 +91 7600300778</p>
         </div>
         
         {/* Profile Section */}
-        <div className="flex items-center space-x-3">
-          <img
-            src="../public/profile.jpeg"
-            alt="Profile"
-            className="w-12 h-12 rounded-full"
-          />
+        <div className="flex items-center space-x-3 border-b pb-4">
+          <img src="/profile.jpeg" alt="Profile" className="w-12 h-12 rounded-full shadow-md" />
           <div>
-            <h2 className="font-bold">Welcome Robert</h2>
+            <h2 className="font-bold text-gray-700">Welcome, Robert</h2>
+            <p className="text-sm text-gray-500">System User</p>
           </div>
         </div>
 
-        {/* Navigation */}
-        <nav className="mt-6">
-          <ul>
-            <li className="p-2 hover:bg-gray-200 rounded text-green-600 font-bold">Dashboard</li>
-            <li className="p-2 hover:bg-gray-200 rounded">Live Site</li>
-            <li className="p-2 hover:bg-gray-200 rounded">My Tax Files</li>
-            <li className="p-2 hover:bg-gray-200 rounded text-red-600">Logout</li>
-          </ul>
+        {/* Navigation Menu */}
+        <nav className="mt-6 space-y-3">
+          <Link to="/admin" className="block p-3 bg-blue-100 text-blue-600 font-bold rounded-lg shadow-sm hover:bg-blue-200 transition">
+            Dashboard
+          </Link>
+          <Link to="/home" className="block p-3 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition">
+            Live Site
+          </Link>
+          <Link to="/adminuser" className="block p-3 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition">
+            My Tax Files
+          </Link>
         </nav>
       </div>
 
       {/* Main Content */}
       <div className="flex-1 p-8">
-        <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Greetings!</h1>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded">User: New Comer</button>
+        
+        {/* Header */}
+        <div className="flex justify-between items-center bg-white p-4 shadow-md rounded-lg">
+          <h1 className="text-2xl font-bold text-gray-800">👋 Greetings, Robert!</h1>
+          <button className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
+            User: New Comer
+          </button>
         </div>
-        <div className="mt-4">
-          <h2 className="text-lg font-semibold">File Your Tax:</h2>
-          <Link to ="/paysubmit" className="bg-red-500 text-white px-4 py-2 rounded mt-2">Let’s Get Started</Link>
-        </div>
-        <div className="grid grid-cols-3 gap-4 mt-6">
-          <img src="../public/tax1.jpeg" alt="Tax" className="rounded-lg shadow-md" />
-          <img src="../public/tax2.jpeg" alt="Tax" className="rounded-lg shadow-md" />
-          <img src="../public/tax3.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md" />
-          <img src="../public/tax4.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md" />
-          <img src="../public/tax5.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md" />
-          <img src="../public/ltax.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md" />
 
+        {/* Call to Action */}
+        <div className="mt-6 bg-white p-6 shadow-md rounded-lg">
+          <h2 className="text-lg font-semibold text-gray-800">📄 File Your Tax:</h2>
+          <Link to="/paysubmit" className="inline-block mt-3 bg-red-500 text-white px-5 py-2 rounded-lg shadow-md hover:bg-red-600 transition">
+            🚀 Lets Get Started
+          </Link>
         </div>
+
+        {/* Image Gallery */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-8">
+          <img src="/tax1.jpeg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
+          <img src="/tax2.jpeg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
+          <img src="/tax3.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
+          <img src="/tax4.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
+          <img src="/tax5.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
+          <img src="/ltax.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
+        </div>
+
       </div>
     </div>
   );
