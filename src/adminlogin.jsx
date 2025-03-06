@@ -7,7 +7,7 @@ function AdminLoginPage() {
           {/* Left Side - Image with Text */}
           <div className="w-1/2 relative flex items-center justify-center p-6 bg-gray-50">
             <img
-              src="../public/img1.jpeg"
+              src="../public/admin.jpg"
               alt="Liberty Tax"
               className="w-100 mx-auto"
             
