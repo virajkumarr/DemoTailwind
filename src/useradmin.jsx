@@ -9,8 +9,8 @@ const AdminUsers = () => {
       <div className="w-64 bg-white shadow-xl border-r border-gray-300 p-6">
         <div className="flex flex-col items-center">
           <img src="../public/img2.jpeg" alt="Liberty Tax" className="w-32 mb-4 rounded-lg shadow-md" />
-          <p className="text-gray-700 font-semibold">Welcome <span className="font-bold">Varney Butler</span></p>
-          <p className="text-sm text-gray-500">System Administrator</p>
+          <p className="text-gray-700 font-semibold">Welcome <span className="font-bold">Varney Butler</span></p>          <p className="text-sm text-gray-500">System Administrator</p>
+
         </div>
 
         <nav className="mt-8 space-y-4">
@@ -70,9 +70,10 @@ const AdminUsers = () => {
             <tbody className="text-gray-700 text-center">
               <tr className="border-t hover:bg-gray-50 transition">
                 <td className="p-3">Tax Payer</td>
-                <td className="p-3">John Doe</td>
-                <td className="p-3">+91 9876543210</td>
-                <td className="p-3">john@example.com</td>
+                <td className="p-3">Anshu Raj</td>
+                <td className="p-3">+91 9182543210</td>
+                <td className="p-3">anshu@example.com</td>
+
                 <td className="p-3 flex justify-center space-x-2">
                   <button className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition">
                     View
@@ -82,8 +83,55 @@ const AdminUsers = () => {
                   </button>
                 </td>
               </tr>
+              <tr className="border-t hover:bg-gray-50 transition">
+                <td className="p-3">Tax Payer</td>
+                <td className="p-3">Buttler</td>
+                <td className="p-3">+91 9768543210</td>
+                <td className="p-3">buttler@example.com</td>
+
+                <td className="p-3 flex justify-center space-x-2">
+                  <button className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition">
+                    View
+                  </button>
+                  <button className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">
+                    Remove
+                  </button>
+                </td>
+              </tr>
+              <tr className="border-t hover:bg-gray-50 transition">
+                <td className="p-3">Tax Payer</td>
+                <td className="p-3">Chisha</td>
+                <td className="p-3">+91 7788543210</td>
+                <td className="p-3">chisa@example.com</td>
+
+                <td className="p-3 flex justify-center space-x-2">
+                  <button className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition">
+                    View
+                  </button>
+                  <button className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">
+                    Remove
+                  </button>
+                </td>
+              </tr>
+              <tr className="border-t hover:bg-gray-50 transition">
+                <td className="p-3">Tax Payer</td>
+                <td className="p-3">Viraj kumar</td>
+                <td className="p-3">+91 9988543210</td>
+                <td className="p-3">viraj@example.com</td>
+
+                <td className="p-3 flex justify-center space-x-2">
+                  <button className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition">
+                    View
+                  </button>
+                  <button className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">
+                    Remove
+                  </button>
+                </td>
+              </tr>
+              
               {/* Add More Rows Here */}
             </tbody>
+
           </table>
         </div>
 

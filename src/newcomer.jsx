@@ -1,16 +1,19 @@
 import { Link } from "react-router-dom";
+import { FaTachometerAlt, FaGlobe, FaFileAlt, FaPhone } from "react-icons/fa";
 
 const Dashboard = () => {
   return (
-    <div className="mt-30 flex h-screen bg-gray-100">
+    <div className=" mt-30 flex h-screen bg-gray-100">
       
       {/* Sidebar */}
-      <div className="w-72 bg-white p-6 shadow-lg border-r border-gray-200">
+      <div className="w-72 bg-white p-6 shadow-xl border-r border-gray-200">
         
         {/* Logo & Contact */}
         <div className="flex flex-col items-center mb-6">
           <img src="/img2.jpeg" alt="Liberty Tax" className="w-28 rounded-lg shadow-md" />
-          <p className="text-blue-600 font-bold mt-2">📞 +91 7600300778</p>
+          <p className="text-blue-600 font-bold mt-2 flex items-center">
+            <FaPhone className="mr-2" /> +91 7600300778
+          </p>
         </div>
         
         {/* Profile Section */}
@@ -24,14 +27,14 @@ const Dashboard = () => {
 
         {/* Navigation Menu */}
         <nav className="mt-6 space-y-3">
-          <Link to="/admin" className="block p-3 bg-blue-100 text-blue-600 font-bold rounded-lg shadow-sm hover:bg-blue-200 transition">
-            Dashboard
+          <Link to="/admin" className="flex items-center p-3 bg-blue-100 text-blue-600 font-bold rounded-lg shadow-sm hover:bg-blue-200 transition">
+            <FaTachometerAlt className="mr-3" /> Dashboard
           </Link>
-          <Link to="/home" className="block p-3 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition">
-            Live Site
+          <Link to="/home" className="flex items-center p-3 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition">
+            <FaGlobe className="mr-3" /> Live Site
           </Link>
-          <Link to="/adminuser" className="block p-3 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition">
-            My Tax Files
+          <Link to="/adminuser" className="flex items-center p-3 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition">
+            <FaFileAlt className="mr-3" /> My Tax Files
           </Link>
         </nav>
       </div>
@@ -57,12 +60,12 @@ const Dashboard = () => {
 
         {/* Image Gallery */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-8">
-          <img src="/tax1.jpeg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
-          <img src="/tax2.jpeg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
-          <img src="/tax3.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
-          <img src="/tax4.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
-          <img src="/tax5.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
-          <img src="/ltax.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform" />
+          <img src="/tax1.jpeg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
+          <img src="/tax1.jpeg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
+          <img src="/tax1.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
+          <img src="/tax4.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
+          <img src="/tax5.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
+          <img src="/ltax.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
         </div>
 
       </div>

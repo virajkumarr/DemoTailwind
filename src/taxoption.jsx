@@ -3,7 +3,7 @@ const TaxOptions = () => {
       <div
         className=" mt-30 flex flex-col items-center justify-center min-h-screen bg-cover bg-center px-6"
         style={{
-          backgroundImage: "url('../public/taxbg.jpg')",
+          backgroundImage: "url('')",
         }}
       >
         {/* Tax Options Container */}
