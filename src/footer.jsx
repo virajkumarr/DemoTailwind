@@ -42,7 +42,6 @@ const Footer = () => {
             <a href="#" className="hover:text-green-500 transition transform hover:scale-110"><FaWhatsapp /></a>
           </div>
         </div>
-
       </div>
 
       {/* Bottom Footer */}
