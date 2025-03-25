@@ -99,7 +99,6 @@ function About() {
               </div>
             ))}
           </div>
-  
           {/* Pagination Dots */}
           <div className="flex justify-center mt-6 space-x-2">
             <span className="h-3 w-3 bg-gray-400 rounded-full"></span>
