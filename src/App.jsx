@@ -12,15 +12,10 @@ import Dashboard from "./newcomer";
 import TaxPaymentForm from "./paymentform";
 import PaymentSuccess from "./payss";
 import TaxOptions from "./taxoption";
-import AdminLoginPage from "./adminlogin";
 import Admintaxfile from "./admintaxfile";
 import AdminUsers from "./useradmin";
-
-
-
-
-
-
+import TaxSlabTable from "./taxregime";
+import BestPracticesITR from "./itr";
 
 
 
@@ -43,10 +38,13 @@ function App() {
           <Route path = "Payss" element={<PaymentSuccess/>}/> 
           <Route path = "home" element={<Home/>}/> 
           <Route path = "taxoption" element={<TaxOptions/>}/> 
-          <Route path = "adminlogin" element={<AdminLoginPage/>}/> 
+        
           <Route path = "admin" element={<AdminDashboard/>}/> 
           <Route path = "admintaxfile" element={<Admintaxfile/>}/> 
           <Route path = "adminuser" element={<AdminUsers/>}/>   
+          <Route path = "rules" element={<TaxSlabTable/>}/>  
+          <Route path = "itr" element={<BestPracticesITR/>}/>  
+
 
 
         </Routes>
