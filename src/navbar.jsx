@@ -61,9 +61,6 @@ function Navbar() {
           <Link to="/contact" className="block lg:inline-block px-4 py-2 hover:text-blue-600">
             Contact
           </Link>
-          <Link to="/adminlogin" className="block lg:inline-block px-4 py-2 hover:text-blue-600">
-            Admin
-          </Link>
           <Link to="/login" className="block lg:inline-block px-4 py-2 hover:text-blue-600">
             Login/Register
           </Link>

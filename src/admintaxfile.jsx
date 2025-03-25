@@ -66,12 +66,51 @@ const Admintaxfile = () => {
             </thead>
             <tbody className="text-gray-700 text-center">
               <tr className="border-t hover:bg-gray-50 transition">
-                <td className="p-3">John Doe</td>
-                <td className="p-3">john@example.com</td>
+                <td className="p-3">Anshu</td>
+                <td className="p-3">anshu@example.com</td>
                 <td className="p-3">TX12345</td>
-                <td className="p-3">$500</td>
+                <td className="p-3">5000</td>
                 <td className="p-3">Credit Card</td>
                 <td className="p-3">12/02/2025</td>
+                <td className="p-3">
+                  <button className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition">
+                    Download
+                  </button>
+                </td>
+              </tr>
+              <tr className="border-t hover:bg-gray-50 transition">
+                <td className="p-3">Buttler</td>
+                <td className="p-3">butler@example.com</td>
+                <td className="p-3">TX987645</td>
+                <td className="p-3">10000</td>
+                <td className="p-3">Credit Card</td>
+                <td className="p-3">02/05/2025</td>
+                <td className="p-3">
+                  <button className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition">
+                    Download
+                  </button>
+                </td>
+              </tr>
+              <tr className="border-t hover:bg-gray-50 transition">
+                <td className="p-3">Chisa</td>
+                <td className="p-3">Chisa@example.com</td>
+                <td className="p-3">TX900045</td>
+                <td className="p-3">35000</td>
+                <td className="p-3">Credit Card</td>
+                <td className="p-3">01/07/2025</td>
+                <td className="p-3">
+                  <button className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition">
+                    Download
+                  </button>
+                </td>
+              </tr>
+              <tr className="border-t hover:bg-gray-50 transition">
+                <td className="p-3">Viraj kr</td>
+                <td className="p-3">virajk@example.com</td>
+                <td className="p-3">TX90845</td>
+                <td className="p-3">15000</td>
+                <td className="p-3">Credit Card</td>
+                <td className="p-3">13/03/2025</td>
                 <td className="p-3">
                   <button className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition">
                     Download

@@ -4,8 +4,8 @@ function ContactUs() {
       <div className="flex flex-col md:flex-row w-full max-w-6xl shadow-xl rounded-2xl overflow-hidden border border-gray-200 bg-gradient-to-br from-white to-gray-100">
         
         {/* Left Side - Contact Details */}
-        <div className="bg-gradient-to-br from-blue-600 to-blue-800 text-white p-8 w-full md:w-1/2 rounded-l-2xl">
-          <h2 className="text-4xl font-bold mb-4">Lets Connect!</h2>
+        <div className="bg-gradient-to-br from-gray-400 to-gray-700 text-white p-8 w-full md:w-1/2 rounded-l-2xl">
+        <h2 className="text-4xl font-bold mb-4">Lets Connect!</h2>
           <p className="text-gray-200 mb-6">We would  love to hear from you. Reach out anytime.</p>
 
           {/* Email */}

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function SignUpPage() {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className=" mt-20 flex items-center justify-center min-h-screen bg-gray-100 p-4">
         <div className="flex bg-white shadow-lg rounded-2xl overflow-hidden max-w-5xl w-full">
           
           {/* Left Side - Image */}
