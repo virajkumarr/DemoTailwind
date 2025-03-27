@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { FaUsers, FaFileInvoiceDollar, FaRegListAlt, FaTachometerAlt, FaGlobe, FaFileAlt, FaSignOutAlt } from "react-icons/fa";
+import { FaUsers, FaTachometerAlt, FaGlobe, FaFileAlt, FaSignOutAlt } from "react-icons/fa";
 
-function AdminDashboard() {
+function SubmittedTax() {
   return (
     <div className="mt-30 flex min-h-screen bg-gray-100">
       {/* Sidebar */}
@@ -44,31 +44,6 @@ function AdminDashboard() {
           </div>
         </div>
 
-        {/* Dashboard Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-gradient-to-r from-red-400 to-red-600 p-6 rounded-lg shadow-lg text-white flex flex-col items-center transform hover:scale-105 transition duration-300">
-            <FaUsers size={40} />
-            <h2 className="text-lg font-semibold mt-3">All Users</h2>
-            <Link to="/alluser" className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
-              Click To See
-            </Link>
-          </div>
-          <div className="bg-gradient-to-r from-green-400 to-green-600 p-6 rounded-lg shadow-lg text-white flex flex-col items-center transform hover:scale-105 transition duration-300">
-            <FaFileInvoiceDollar size={40} />
-            <h2 className="text-lg font-semibold mt-3">All Submitted Tax</h2>
-            <Link to="/" className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
-              Click To See
-            </Link>
-          </div>
-          <div className="bg-gradient-to-r from-blue-400 to-blue-600 p-6 rounded-lg shadow-lg text-white flex flex-col items-center transform hover:scale-105 transition duration-300">
-            <FaRegListAlt size={40} />
-            <h2 className="text-lg font-semibold mt-3">User Form Fields</h2>
-            <Link to="/form-fields" className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
-              Click To See
-            </Link>
-          </div>
-        </div>
-
         {/* Recent Payments Table */}
         <div className="mt-8 bg-white p-6 rounded-lg shadow-lg border border-gray-200">
           <h3 className="text-xl font-semibold mb-4">Recent Payment Records</h3>
@@ -81,15 +56,18 @@ function AdminDashboard() {
               </tr>
             </thead>
             <tbody>
-              {[{
-                name: "Anshu", email: "Anshu@email.com", id: "#12345", amount: "10,500", method: "Credit Card", date: "02/17/2025"
-              }, {
-                name: "Buttler", email: "Buttler@email.com", id: "#544321", amount: "90,500", method: "Credit Card", date: "02/17/2025"
-              }, {
-                name: "Chisa", email: "chisa@email.com", id: "#98765", amount: "15,000", method: "Credit Card", date: "02/25/2025"
-              }, {
-                name: "Viraj Kr", email: "viraj@email.com", id: "#976432", amount: "34,500", method: "Credit Card", date: "03/06/2025"
-              }].map(({ name, email, id, amount, method, date }, index) => (
+              {[
+                { name: "Anshu", email: "anshu@example.com", id: "TX12345", amount: "5,000", method: "Credit Card", date: "12/02/2025" },
+                { name: "Buttler", email: "buttler@example.com", id: "TX987645", amount: "10,000", method: "Credit Card", date: "02/05/2025" },
+                { name: "Chisa", email: "chisa@example.com", id: "TX900045", amount: "35,000", method: "Credit Card", date: "01/07/2025" },
+                { name: "Viraj Kr", email: "virajk@example.com", id: "TX90845", amount: "15,000", method: "Credit Card", date: "13/03/2025" },
+                { name: "Rohan", email: "rohan@example.com", id: "TX765432", amount: "20,000", method: "Credit Card", date: "04/04/2025" },
+                { name: "Meera", email: "meera@example.com", id: "TX564738", amount: "12,500", method: "Credit Card", date: "15/04/2025" },
+                { name: "Aisha", email: "aisha@example.com", id: "TX453621", amount: "50,000", method: "Credit Card", date: "20/04/2025" },
+                { name: "Rahul", email: "rahul@example.com", id: "TX342567", amount: "18,750", method: "Credit Card", date: "30/04/2025" },
+                { name: "Neha", email: "neha@example.com", id: "TX238765", amount: "22,000", method: "Credit Card", date: "05/05/2025" },
+                { name: "Aman", email: "aman@example.com", id: "TX198234", amount: "40,000", method: "Credit Card", date: "10/05/2025" },
+              ].map(({ name, email, id, amount, method, date }, index) => (
                 <tr key={id} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-gray-100'} hover:bg-gray-200 transition`}>
                   <td className="p-3 border border-gray-300">{name}</td>
                   <td className="p-3 border border-gray-300">{email}</td>
@@ -107,4 +85,4 @@ function AdminDashboard() {
   );
 }
 
-export default AdminDashboard;
+export default SubmittedTax;

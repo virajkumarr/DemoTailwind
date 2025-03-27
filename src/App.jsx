@@ -16,6 +16,7 @@ import Admintaxfile from "./admintaxfile";
 import AdminUsers from "./useradmin";
 import TaxSlabTable from "./taxregime";
 import BestPracticesITR from "./itr";
+import AllUser from "./alluser";
 
 
 
@@ -44,6 +45,8 @@ function App() {
           <Route path = "adminuser" element={<AdminUsers/>}/>   
           <Route path = "rules" element={<TaxSlabTable/>}/>  
           <Route path = "itr" element={<BestPracticesITR/>}/>  
+          <Route path = "alluser" element={<AllUser/>}/> 
+          
 
 
 
