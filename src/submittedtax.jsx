@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaUsers, FaTachometerAlt, FaGlobe, FaFileAlt, FaSignOutAlt } from "react-icons/fa";
 
-function SubmittedTax() {
+function SubmittedTax() { 
   return (
     <div className="mt-30 flex min-h-screen bg-gray-100">
       {/* Sidebar */}
