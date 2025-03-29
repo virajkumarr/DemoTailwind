@@ -27,7 +27,7 @@ const Dashboard = () => {
 
         {/* Navigation Menu */}
         <nav className="mt-6 space-y-3">
-          <Link to="/admin" className="flex items-center p-3 bg-blue-100 text-blue-600 font-bold rounded-lg shadow-sm hover:bg-blue-200 transition">
+          <Link to="" className="flex items-center p-3 bg-blue-100 text-blue-600 font-bold rounded-lg shadow-sm hover:bg-blue-200 transition">
             <FaTachometerAlt className="mr-3" /> Dashboard
           </Link>
           <Link to="/home" className="flex items-center p-3 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition">

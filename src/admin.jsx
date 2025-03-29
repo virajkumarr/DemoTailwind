@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaUsers, FaFileInvoiceDollar, FaRegListAlt, FaTachometerAlt, FaGlobe, FaFileAlt, FaSignOutAlt } from "react-icons/fa";
+import { FaUsers, FaFileInvoiceDollar, FaRegListAlt, FaTachometerAlt, FaGlobe, FaSignOutAlt } from "react-icons/fa";
 
 function AdminDashboard() {
   return (
@@ -19,12 +19,7 @@ function AdminDashboard() {
           <Link to="/home" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
             <FaGlobe className="mr-2" /> Live Site
           </Link>
-          <Link to="/admintaxfile" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
-            <FaFileAlt className="mr-2" /> Admin TaxFile
-          </Link>
-          <Link to="/adminuser" className="flex items-center text-green-600 font-bold p-2 hover:bg-green-100 rounded-lg">
-            <FaUsers className="mr-2" /> Users
-          </Link>
+          
           <Link to="/logout" className="flex items-center text-red-500 font-bold p-2 hover:bg-red-100 rounded-lg">
             <FaSignOutAlt className="mr-2" /> Logout
           </Link>
@@ -56,7 +51,7 @@ function AdminDashboard() {
           <div className="bg-gradient-to-r from-green-400 to-green-600 p-6 rounded-lg shadow-lg text-white flex flex-col items-center transform hover:scale-105 transition duration-300">
             <FaFileInvoiceDollar size={40} />
             <h2 className="text-lg font-semibold mt-3">All Submitted Tax</h2>
-            <Link to="/" className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
+            <Link to="/subtax"   className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
               Click To See
             </Link>
           </div>

@@ -1,4 +1,4 @@
-import { FaTachometerAlt, FaGlobe, FaUser, FaSignOutAlt, FaPhone, FaUsers} from "react-icons/fa";
+import { FaTachometerAlt, FaGlobe, FaSignOutAlt, FaPhone, } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const AdminUsers = () => {
@@ -22,14 +22,7 @@ const AdminUsers = () => {
             <FaGlobe className="text-lg" /> <span className="font-medium">Live Site</span>
           </Link>
 
-          <Link to="/admintaxfile" className="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-green-100 transition">
-            <FaUser className="text-lg" /> <span className="font-medium">Admin TaxFile</span>
-          </Link>
-
-          <Link to="/adminuser" className="flex items-center space-x-3 p-3 rounded-lg text-green-600 font-bold hover:bg-green-100 transition">
-            <FaUsers className="text-lg" /> <span>Users</span>
-          </Link>
-
+         
           <Link to="/home" className="flex items-center space-x-3 p-3 rounded-lg text-red-600 font-bold hover:bg-red-100 transition">
             <FaSignOutAlt className="text-lg" /> <span>Logout</span>
           </Link>
@@ -64,7 +57,7 @@ const AdminUsers = () => {
                 <th className="p-3">Name</th>
                 <th className="p-3">Phone</th>
                 <th className="p-3">Email</th>
-                <th className="p-3">Actions</th>
+                <th className="p-3">Total Payment</th>
               </tr>
             </thead>
             <tbody className="text-gray-700 text-center">
@@ -73,60 +66,36 @@ const AdminUsers = () => {
                 <td className="p-3">Anshu Raj</td>
                 <td className="p-3">+91 9182543210</td>
                 <td className="p-3">anshu@example.com</td>
+                <td className="p-3">1234$</td>
 
-                <td className="p-3 flex justify-center space-x-2">
-                  <button className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition">
-                    View
-                  </button>
-                  <button className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">
-                    Remove
-                  </button>
-                </td>
+               
               </tr>
               <tr className="border-t hover:bg-gray-50 transition">
                 <td className="p-3">Tax Payer</td>
                 <td className="p-3">Buttler</td>
                 <td className="p-3">+91 9768543210</td>
                 <td className="p-3">buttler@example.com</td>
+                <td className="p-3">1234$</td>
 
-                <td className="p-3 flex justify-center space-x-2">
-                  <button className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition">
-                    View
-                  </button>
-                  <button className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">
-                    Remove
-                  </button>
-                </td>
+               
               </tr>
               <tr className="border-t hover:bg-gray-50 transition">
                 <td className="p-3">Tax Payer</td>
                 <td className="p-3">Chisha</td>
                 <td className="p-3">+91 7788543210</td>
                 <td className="p-3">chisa@example.com</td>
+                <td className="p-3">1234$</td>
 
-                <td className="p-3 flex justify-center space-x-2">
-                  <button className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition">
-                    View
-                  </button>
-                  <button className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">
-                    Remove
-                  </button>
-                </td>
+                
               </tr>
               <tr className="border-t hover:bg-gray-50 transition">
                 <td className="p-3">Tax Payer</td>
                 <td className="p-3">Viraj kumar</td>
                 <td className="p-3">+91 9988543210</td>
                 <td className="p-3">viraj@example.com</td>
+                <td className="p-3">1234$</td>
 
-                <td className="p-3 flex justify-center space-x-2">
-                  <button className="bg-green-500 text-white px-3 py-1 rounded-lg hover:bg-green-600 transition">
-                    View
-                  </button>
-                  <button className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition">
-                    Remove
-                  </button>
-                </td>
+              
               </tr>
               
               {/* Add More Rows Here */}

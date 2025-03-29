@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaUsers, FaTachometerAlt, FaGlobe, FaFileAlt, FaSignOutAlt } from "react-icons/fa";
+import {   FaTachometerAlt, FaGlobe,  FaSignOutAlt } from "react-icons/fa";
 
 function SubmittedTax() { 
   return (
@@ -18,12 +18,6 @@ function SubmittedTax() {
           </Link>
           <Link to="/home" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
             <FaGlobe className="mr-2" /> Live Site
-          </Link>
-          <Link to="/admintaxfile" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
-            <FaFileAlt className="mr-2" /> Admin TaxFile
-          </Link>
-          <Link to="/adminuser" className="flex items-center text-green-600 font-bold p-2 hover:bg-green-100 rounded-lg">
-            <FaUsers className="mr-2" /> Users
           </Link>
           <Link to="/logout" className="flex items-center text-red-500 font-bold p-2 hover:bg-red-100 rounded-lg">
             <FaSignOutAlt className="mr-2" /> Logout
