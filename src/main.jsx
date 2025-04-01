@@ -5,6 +5,7 @@ import './index.css'
 // import AdminDashboard from './admin'
 // import Admintaxfile from './admintaxfile'
 import App from './App'
+//import AdminPanel from './adminpanel/adminpanel'
 
 
 
@@ -12,7 +13,7 @@ import App from './App'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    < App />
+    <App/>
     {/* <Admintaxfile /> */}
   </StrictMode>,
 )

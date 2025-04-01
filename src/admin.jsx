@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaUsers, FaFileInvoiceDollar, FaRegListAlt, FaTachometerAlt, FaGlobe, FaSignOutAlt } from "react-icons/fa";
+import { FaUsers, FaFileInvoiceDollar,  FaTachometerAlt, FaGlobe, FaSignOutAlt } from "react-icons/fa";
 
 function AdminDashboard() {
   return (
@@ -20,7 +20,7 @@ function AdminDashboard() {
             <FaGlobe className="mr-2" /> Live Site
           </Link>
           
-          <Link to="/logout" className="flex items-center text-red-500 font-bold p-2 hover:bg-red-100 rounded-lg">
+          <Link to="/home" className="flex items-center text-red-500 font-bold p-2 hover:bg-red-100 rounded-lg">
             <FaSignOutAlt className="mr-2" /> Logout
           </Link>
         </nav>
@@ -34,7 +34,6 @@ function AdminDashboard() {
             User: <span className="bg-blue-500 text-white px-3 py-1 rounded">Admin</span>
           </h1>
           <div className="flex space-x-4">
-            <Link to="/userprofile" className="text-green-600 font-medium hover:underline">Profile</Link>
             <Link to="/home" className="text-red-500 font-medium hover:underline">Logout</Link>
           </div>
         </div>
@@ -55,13 +54,7 @@ function AdminDashboard() {
               Click To See
             </Link>
           </div>
-          <div className="bg-gradient-to-r from-blue-400 to-blue-600 p-6 rounded-lg shadow-lg text-white flex flex-col items-center transform hover:scale-105 transition duration-300">
-            <FaRegListAlt size={40} />
-            <h2 className="text-lg font-semibold mt-3">User Form Fields</h2>
-            <Link to="/form-fields" className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
-              Click To See
-            </Link>
-          </div>
+          
         </div>
 
         {/* Recent Payments Table */}

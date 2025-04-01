@@ -10,7 +10,7 @@ const TaxSlabTable = () => {
   ];
 
   return (
-    <div className="mt-10 p-6 max-w-4xl mx-auto bg-gray-100 shadow-lg rounded-lg">
+    <div className="mt-30 p-6 max-w-4xl mx-auto bg-gray-100 shadow-lg rounded-lg">
       <h2 className="text-3xl font-bold mb-4 text-center text-gray-800">New Tax Regime</h2>
       <table className="w-full border-collapse text-left rounded-lg overflow-hidden shadow-md">
         <thead>

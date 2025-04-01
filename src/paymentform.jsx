@@ -51,6 +51,7 @@ const TaxPaymentForm = () => {
               type="text"
               className="w-full p-3 border rounded-md focus:ring focus:ring-red-300"
               placeholder="Enter Username Here"
+              name="username"
             />
           </div>
 
@@ -60,6 +61,7 @@ const TaxPaymentForm = () => {
               type="email"
               className="w-full p-3 border rounded-md focus:ring focus:ring-red-300"
               placeholder="Enter Email Here"
+              name="email"
             />
           </div>
 
@@ -69,6 +71,7 @@ const TaxPaymentForm = () => {
               type="text"
               className="w-full p-3 border rounded-md focus:ring focus:ring-red-300"
               placeholder="Enter Tax File ID Here"
+              name="taxfile id"
             />
           </div>
 
@@ -78,22 +81,16 @@ const TaxPaymentForm = () => {
               type="number"
               className="w-full p-3 border rounded-md focus:ring focus:ring-red-300"
               placeholder="Enter Amount Here"
+              name="amount"
             />
           </div>
-
-          <div className="flex items-center space-x-5">
-            <div>
-              <label className="block text-gray-700 font-medium">Payment Mode</label>
-              <p className="text-gray-600">Scan UPI code</p>
-            </div>
-            <img src="../public/qr.jpg" alt="QR Code" className="w-24 h-24 border-2 border-gray-300 rounded-lg" />
-          </div>
-
           <div>
             <label className="block text-gray-700 font-medium">Payment Date</label>
             <input
               type="date"
               className="w-full p-3 border rounded-md focus:ring focus:ring-red-300"
+              placeholder="Enter Payment Date Here"
+              name="paymentdate"
             />
           </div>
 
