@@ -42,7 +42,6 @@ function App() {
           <Route path = "Payss" element={<PaymentSuccess/>}/> 
           <Route path = "home" element={<Home/>}/> 
           <Route path = "taxoption" element={<TaxOptions/>}/> 
-        
           <Route path = "admin" element={<AdminDashboard/>}/> 
           <Route path = "admintaxfile" element={<Admintaxfile/>}/> 
           <Route path = "adminuser" element={<AdminUsers/>}/>   

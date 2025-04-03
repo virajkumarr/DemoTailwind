@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 
 function SignUpPage() {
@@ -30,15 +29,6 @@ function SignUpPage() {
   
             {/* Input Fields */}
             <div className="mt-6 space-y-4">
-              <div className="relative">
-                <span className="absolute left-3 top-2 text-gray-500">👤</span>
-                <input
-                  type="text"
-                  placeholder="Select Tax Type"
-                  className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-  
               <div className="relative">
                 <span className="absolute left-3 top-2 text-gray-500">👤</span>
                 <input
@@ -93,7 +83,7 @@ function SignUpPage() {
                 </label>
               </div>
   
-              <Link to ="/newcomer"className="w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+              <Link to ="/newcomer" className="w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
                 Register Here
               </Link>
             </div>
@@ -111,4 +101,3 @@ function SignUpPage() {
   }
   
   export default SignUpPage;
-  

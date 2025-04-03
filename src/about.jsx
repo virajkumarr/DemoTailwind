@@ -43,7 +43,7 @@ function About() {
               {/* Left - Image Section */}
               <div className="md:w-1/3 relative flex justify-center">
                 <img
-                  src="/img3.jpg" // Ensure the correct image path
+                  src="/about.jpg" // Ensure the correct image path
                   alt="Professional"
                   className="rounded-lg shadow-lg border-4 border-gray-400 transition-transform transform hover:scale-105 duration-300"
                 />

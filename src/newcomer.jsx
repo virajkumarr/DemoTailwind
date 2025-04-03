@@ -62,10 +62,10 @@ const Dashboard = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-8">
           <img src="/ltax.jpeg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
           <img src="/tax1.jpeg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
-          <img src="/tax5.jpeg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
-          <img src="/x3.jpg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
-          <img src="/x1.jpg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
-          <img src="/x2.jpg" alt="Corporate Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
+          <img src="/tax5.jpeg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
+          <img src="/x3.jpg" alt=" Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
+          <img src="/x1.jpg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
+          <img src="/x2.jpg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
         </div>
 
       </div>

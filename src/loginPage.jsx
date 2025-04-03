@@ -45,26 +45,6 @@ function LoginPage() {
 
             {/* Input Fields */}
             <div className="mt-6 space-y-5">
-              {!isAdmin && (
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-gray-500">🧑</span>
-                  <input
-                    type="text"
-                    placeholder="Full Name"
-                    className="w-full pl-10 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
-                  />
-                </div>
-              )}
-              {!isAdmin && (
-                <div className="relative">
-                  <span className="absolute left-3 top-3 text-gray-500">📞</span>
-                  <input
-                    type="text"
-                    placeholder="Mobile Number"
-                    className="w-full pl-10 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
-                  />
-                </div>
-              )}
               <div className="relative">
                 <span className="absolute left-3 top-3 text-gray-500">✉️</span>
                 <input

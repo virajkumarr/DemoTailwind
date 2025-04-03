@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaUsers, FaFileInvoiceDollar,  FaTachometerAlt, FaGlobe, FaSignOutAlt } from "react-icons/fa";
+import { FaUsers, FaFileInvoiceDollar,  FaTachometerAlt, FaGlobe, FaSignOutAlt,FaUserEdit } from "react-icons/fa";
 
 function AdminDashboard() {
   return (
@@ -51,6 +51,13 @@ function AdminDashboard() {
             <FaFileInvoiceDollar size={40} />
             <h2 className="text-lg font-semibold mt-3">All Submitted Tax</h2>
             <Link to="/subtax"   className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
+              Click To See
+            </Link>
+          </div>
+          <div className="bg-gradient-to-r from-blue-400 to-blue-600 p-6 rounded-lg shadow-lg text-white flex flex-col items-center transform hover:scale-105 transition duration-300">
+            <FaUserEdit size={40} />
+            <h2 className="text-lg font-semibold mt-3">User Form</h2>
+            <Link to="/userform" className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
               Click To See
             </Link>
           </div>
