@@ -1,7 +1,71 @@
 import { Link } from "react-router-dom";
-import {   FaTachometerAlt, FaGlobe,  FaSignOutAlt } from "react-icons/fa";
+import { FaTachometerAlt, FaGlobe, FaSignOutAlt, FaSearch } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-function SubmittedTax() { 
+function SubmittedTax() {
+  const [payments, setPayments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredPayments, setFilteredPayments] = useState([]);
+
+  useEffect(() => {
+    fetchPayments();
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery.trim() === "") {
+      setFilteredPayments(payments);
+    } else {
+      const filtered = payments.filter(payment => 
+        payment.taxfileid.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredPayments(filtered);
+    }
+  }, [searchQuery, payments]);
+
+  const fetchPayments = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/getfetch/payment");
+      if (response.data.success) {
+        setPayments(response.data.payments);
+        setFilteredPayments(response.data.payments);
+      } else {
+        setError("Failed to fetch payments");
+      }
+    } catch (error) {
+      console.error("Error fetching payments:", error);
+      setError("Error fetching payments. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  if (loading) {
+    return (
+      <div className="mt-30 flex min-h-screen bg-gray-100">
+        <div className="w-full flex items-center justify-center">
+          <div className="text-xl">Loading payments...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="mt-30 flex min-h-screen bg-gray-100">
+        <div className="w-full flex items-center justify-center">
+          <div className="text-xl text-red-600">{error}</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-30 flex min-h-screen bg-gray-100">
       {/* Sidebar */}
@@ -40,37 +104,46 @@ function SubmittedTax() {
 
         {/* Recent Payments Table */}
         <div className="mt-8 bg-white p-6 rounded-lg shadow-lg border border-gray-200">
-          <h3 className="text-xl font-semibold mb-4">Recent Payment Records</h3>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-semibold">Recent Payment Records</h3>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search by Tax File ID..."
+                value={searchQuery}
+                onChange={handleSearch}
+                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+              <FaSearch className="absolute left-3 top-3 text-gray-400" />
+            </div>
+          </div>
           <table className="w-full border-collapse text-gray-700">
             <thead>
               <tr className="bg-blue-500 text-white">
-                {['User Name', 'Email', 'TaxFile ID', 'Amount', 'Payment Method', 'Payment Date'].map(header => (
-                  <th key={header} className="p-3 border border-gray-300">{header}</th>
-                ))}
+                <th className="p-3 border border-gray-300">User Name</th>
+                <th className="p-3 border border-gray-300">Email</th>
+                <th className="p-3 border border-gray-300">Tax File ID</th>
+                <th className="p-3 border border-gray-300">Amount</th>
+                <th className="p-3 border border-gray-300">Payment Date</th>
               </tr>
             </thead>
             <tbody>
-              {[
-                { name: "Anshu", email: "anshu@example.com", id: "TX12345", amount: "5,000", method: "Credit Card", date: "12/02/2025" },
-                { name: "Buttler", email: "buttler@example.com", id: "TX987645", amount: "10,000", method: "Credit Card", date: "02/05/2025" },
-                { name: "Chisa", email: "chisa@example.com", id: "TX900045", amount: "35,000", method: "Credit Card", date: "01/07/2025" },
-                { name: "Viraj Kr", email: "virajk@example.com", id: "TX90845", amount: "15,000", method: "Credit Card", date: "13/03/2025" },
-                { name: "Rohan", email: "rohan@example.com", id: "TX765432", amount: "20,000", method: "Credit Card", date: "04/04/2025" },
-                { name: "Meera", email: "meera@example.com", id: "TX564738", amount: "12,500", method: "Credit Card", date: "15/04/2025" },
-                { name: "Aisha", email: "aisha@example.com", id: "TX453621", amount: "50,000", method: "Credit Card", date: "20/04/2025" },
-                { name: "Rahul", email: "rahul@example.com", id: "TX342567", amount: "18,750", method: "Credit Card", date: "30/04/2025" },
-                { name: "Neha", email: "neha@example.com", id: "TX238765", amount: "22,000", method: "Credit Card", date: "05/05/2025" },
-                { name: "Aman", email: "aman@example.com", id: "TX198234", amount: "40,000", method: "Credit Card", date: "10/05/2025" },
-              ].map(({ name, email, id, amount, method, date }, index) => (
-                <tr key={id} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-gray-100'} hover:bg-gray-200 transition`}>
-                  <td className="p-3 border border-gray-300">{name}</td>
-                  <td className="p-3 border border-gray-300">{email}</td>
-                  <td className="p-3 border border-gray-300">{id}</td>
-                  <td className="p-3 border border-gray-300">{amount}</td>
-                  <td className="p-3 border border-gray-300">{method}</td>
-                  <td className="p-3 border border-gray-300">{date}</td>
+              {filteredPayments.map((payment, index) => (
+                <tr key={payment._id} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-gray-100'} hover:bg-gray-200 transition`}>
+                  <td className="p-3 border border-gray-300">{payment.username}</td>
+                  <td className="p-3 border border-gray-300">{payment.email}</td>
+                  <td className="p-3 border border-gray-300">{payment.taxfileid}</td>
+                  <td className="p-3 border border-gray-300">₹{payment.amount}</td>
+                  <td className="p-3 border border-gray-300">{new Date(payment.paymentdate).toLocaleDateString()}</td>
                 </tr>
               ))}
+              {filteredPayments.length === 0 && (
+                <tr>
+                  <td colSpan="5" className="p-4 text-center text-gray-500">
+                    No payments found matching your search.
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

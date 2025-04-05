@@ -1,7 +1,47 @@
-import { FaTachometerAlt, FaGlobe, FaSignOutAlt, FaPhone, } from "react-icons/fa";
+import { FaTachometerAlt, FaGlobe, FaSignOutAlt, FaPhone, FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const AdminUsers = () => {
+  const [payments, setPayments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredPayments, setFilteredPayments] = useState([]);
+
+  useEffect(() => {
+    fetchPayments();
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery.trim() === "") {
+      setFilteredPayments(payments);
+    } else {
+      const filtered = payments.filter(payment =>
+        payment.email.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredPayments(filtered);
+    }
+  }, [searchQuery, payments]);
+
+  const fetchPayments = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/getfetch/payment');
+      if (response.data.success) {
+        setPayments(response.data.payments);
+        setFilteredPayments(response.data.payments);
+      } else {
+        setError("Failed to fetch payments");
+      }
+    } catch (err) {
+      console.error('Error fetching payments:', err);
+      setError("Error loading payments. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="mt-30 flex h-screen bg-gray-100">
 
@@ -43,66 +83,74 @@ const AdminUsers = () => {
           </button>
         </div>
 
+        {/* Search Bar */}
+        <div className="mt-6 mb-4">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search by email..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full p-3 pl-10 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            />
+            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          </div>
+        </div>
+
         {/* Title */}
         <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-4 border-b-2 border-blue-500 pb-2">
           All Users
         </h2>
 
+        {/* Loading and Error States */}
+        {loading && (
+          <div className="text-center py-4">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
+            <p className="mt-2 text-gray-600">Loading payments...</p>
+          </div>
+        )}
+
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+            <span className="block sm:inline">{error}</span>
+          </div>
+        )}
+
         {/* Table */}
-        <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-          <table className="w-full border-collapse">
-            <thead className="bg-blue-600 text-white">
-              <tr>
-                <th className="p-3">Tax Role</th>
-                <th className="p-3">Name</th>
-                <th className="p-3">Phone</th>
-                <th className="p-3">Email</th>
-                <th className="p-3">Total Payment</th>
-              </tr>
-            </thead>
-            <tbody className="text-gray-700 text-center">
-              <tr className="border-t hover:bg-gray-50 transition">
-                <td className="p-3">Tax Payer</td>
-                <td className="p-3">Anshu Raj</td>
-                <td className="p-3">+91 9182543210</td>
-                <td className="p-3">anshu@example.com</td>
-                <td className="p-3">1234$</td>
-
-               
-              </tr>
-              <tr className="border-t hover:bg-gray-50 transition">
-                <td className="p-3">Tax Payer</td>
-                <td className="p-3">Buttler</td>
-                <td className="p-3">+91 9768543210</td>
-                <td className="p-3">buttler@example.com</td>
-                <td className="p-3">1234$</td>
-
-               
-              </tr>
-              <tr className="border-t hover:bg-gray-50 transition">
-                <td className="p-3">Tax Payer</td>
-                <td className="p-3">Chisha</td>
-                <td className="p-3">+91 7788543210</td>
-                <td className="p-3">chisa@example.com</td>
-                <td className="p-3">1234$</td>
-
-                
-              </tr>
-              <tr className="border-t hover:bg-gray-50 transition">
-                <td className="p-3">Tax Payer</td>
-                <td className="p-3">Viraj kumar</td>
-                <td className="p-3">+91 9988543210</td>
-                <td className="p-3">viraj@example.com</td>
-                <td className="p-3">1234$</td>
-
-              
-              </tr>
-              
-              {/* Add More Rows Here */}
-            </tbody>
-
-          </table>
-        </div>
+        {!loading && !error && (
+          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <table className="w-full border-collapse">
+              <thead className="bg-blue-600 text-white">
+                <tr>
+                  <th className="p-3">Name</th>
+                  <th className="p-3">Email</th>
+                  <th className="p-3">Tax File ID</th>
+                  <th className="p-3">Amount</th>
+                  <th className="p-3">Payment Date</th>
+                </tr>
+              </thead>
+              <tbody className="text-gray-700 text-center">
+                {filteredPayments.length === 0 ? (
+                  <tr>
+                    <td colSpan="5" className="p-4 text-gray-500">
+                      No payments found
+                    </td>
+                  </tr>
+                ) : (
+                  filteredPayments.map((payment) => (
+                    <tr key={payment._id} className="border-t hover:bg-gray-50 transition">
+                      <td className="p-3">{payment.username}</td>
+                      <td className="p-3">{payment.email}</td>
+                      <td className="p-3">{payment.taxfileid}</td>
+                      <td className="p-3">₹{payment.amount}</td>
+                      <td className="p-3">{new Date(payment.paymentdate).toLocaleDateString()}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
 
       </div>
     </div>

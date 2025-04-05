@@ -16,12 +16,10 @@ import Admintaxfile from "./admintaxfile";
 import AdminUsers from "./useradmin";
 import TaxSlabTable from "./taxregime";
 import BestPracticesITR from "./itr";
-
-
 import AllUser from "./alluser";
 import SubmittedTax from "./submittedtax";
-
-
+import UserField from "./userfield";
+import AdminPanel from "./components/AdminPanel";
 
 function App() {
     return (
@@ -49,10 +47,8 @@ function App() {
           <Route path = "itr" element={<BestPracticesITR/>}/>  
           <Route path = "alluser" element={<AllUser/>}/> 
           <Route path = "subtax" element={<SubmittedTax/>}/> 
-          
-
-
-
+          <Route path = "userfield" element={<UserField/>}/> 
+          <Route path = "admin-panel" element={<AdminPanel/>}/> 
         </Routes>
         < Footer />
         

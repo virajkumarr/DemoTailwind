@@ -1,7 +1,33 @@
 import { Link } from "react-router-dom";
-import { FaUsers, FaFileInvoiceDollar,  FaTachometerAlt, FaGlobe, FaSignOutAlt,FaUserEdit } from "react-icons/fa";
+import { FaUsers, FaFileInvoiceDollar, FaTachometerAlt, FaGlobe, FaSignOutAlt, FaUserEdit } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function AdminDashboard() {
+  const [payments, setPayments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetchPayments();
+  }, []);
+
+  const fetchPayments = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/getfetch/payment");
+      if (response.data.success) {
+        setPayments(response.data.payments);
+      } else {
+        setError("Failed to fetch payments");
+      }
+    } catch (error) {
+      console.error("Error fetching payments:", error);
+      setError("Error fetching payments. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="mt-30 flex min-h-screen bg-gray-100">
       {/* Sidebar */}
@@ -19,7 +45,6 @@ function AdminDashboard() {
           <Link to="/home" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
             <FaGlobe className="mr-2" /> Live Site
           </Link>
-          
           <Link to="/home" className="flex items-center text-red-500 font-bold p-2 hover:bg-red-100 rounded-lg">
             <FaSignOutAlt className="mr-2" /> Logout
           </Link>
@@ -50,52 +75,57 @@ function AdminDashboard() {
           <div className="bg-gradient-to-r from-green-400 to-green-600 p-6 rounded-lg shadow-lg text-white flex flex-col items-center transform hover:scale-105 transition duration-300">
             <FaFileInvoiceDollar size={40} />
             <h2 className="text-lg font-semibold mt-3">All Submitted Tax</h2>
-            <Link to="/subtax"   className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
+            <Link to="/subtax" className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
               Click To See
             </Link>
           </div>
           <div className="bg-gradient-to-r from-blue-400 to-blue-600 p-6 rounded-lg shadow-lg text-white flex flex-col items-center transform hover:scale-105 transition duration-300">
             <FaUserEdit size={40} />
             <h2 className="text-lg font-semibold mt-3">User Form</h2>
-            <Link to="/userform" className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
+            <Link to="/userfield" className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
               Click To See
             </Link>
           </div>
-          
         </div>
 
         {/* Recent Payments Table */}
         <div className="mt-8 bg-white p-6 rounded-lg shadow-lg border border-gray-200">
           <h3 className="text-xl font-semibold mb-4">Recent Payment Records</h3>
-          <table className="w-full border-collapse text-gray-700">
-            <thead>
-              <tr className="bg-blue-500 text-white">
-                {['User Name', 'Email', 'TaxFile ID', 'Amount', 'Payment Method', 'Payment Date'].map(header => (
-                  <th key={header} className="p-3 border border-gray-300">{header}</th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {[{
-                name: "Anshu", email: "Anshu@email.com", id: "#12345", amount: "10,500", method: "Credit Card", date: "02/17/2025"
-              }, {
-                name: "Buttler", email: "Buttler@email.com", id: "#544321", amount: "90,500", method: "Credit Card", date: "02/17/2025"
-              }, {
-                name: "Chisa", email: "chisa@email.com", id: "#98765", amount: "15,000", method: "Credit Card", date: "02/25/2025"
-              }, {
-                name: "Viraj Kr", email: "viraj@email.com", id: "#976432", amount: "34,500", method: "Credit Card", date: "03/06/2025"
-              }].map(({ name, email, id, amount, method, date }, index) => (
-                <tr key={id} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-gray-100'} hover:bg-gray-200 transition`}>
-                  <td className="p-3 border border-gray-300">{name}</td>
-                  <td className="p-3 border border-gray-300">{email}</td>
-                  <td className="p-3 border border-gray-300">{id}</td>
-                  <td className="p-3 border border-gray-300">{amount}</td>
-                  <td className="p-3 border border-gray-300">{method}</td>
-                  <td className="p-3 border border-gray-300">{date}</td>
+          {loading ? (
+            <div className="text-center py-4">Loading payments...</div>
+          ) : error ? (
+            <div className="text-center text-red-600 py-4">{error}</div>
+          ) : (
+            <table className="w-full border-collapse text-gray-700">
+              <thead>
+                <tr className="bg-blue-500 text-white">
+                  <th className="p-3 border border-gray-300">User Name</th>
+                  <th className="p-3 border border-gray-300">Email</th>
+                  <th className="p-3 border border-gray-300">TaxFile ID</th>
+                  <th className="p-3 border border-gray-300">Amount</th>
+                  <th className="p-3 border border-gray-300">Payment Date</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {payments.map((payment, index) => (
+                  <tr key={payment._id} className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-gray-100'} hover:bg-gray-200 transition`}>
+                    <td className="p-3 border border-gray-300">{payment.username}</td>
+                    <td className="p-3 border border-gray-300">{payment.email}</td>
+                    <td className="p-3 border border-gray-300">{payment.taxfileid}</td>
+                    <td className="p-3 border border-gray-300">₹{payment.amount}</td>
+                    <td className="p-3 border border-gray-300">{new Date(payment.paymentdate).toLocaleDateString()}</td>
+                  </tr>
+                ))}
+                {payments.length === 0 && (
+                  <tr>
+                    <td colSpan="5" className="p-4 text-center text-gray-500">
+                      No payments found.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          )}
         </div>
       </main>
     </div>
