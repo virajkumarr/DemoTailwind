@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaUsers, FaFileInvoiceDollar, FaTachometerAlt, FaGlobe, FaSignOutAlt, FaUserEdit } from "react-icons/fa";
+import { FaUsers, FaFileInvoiceDollar, FaTachometerAlt, FaGlobe, FaSignOutAlt, FaUserEdit, FaQuestionCircle} from "react-icons/fa";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -45,6 +45,13 @@ function AdminDashboard() {
           <Link to="/home" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
             <FaGlobe className="mr-2" /> Live Site
           </Link>
+        
+
+          {/* FAQ Management Option */}
+          <Link to="/faq-management" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
+            <FaQuestionCircle className="mr-2" /> FAQ Management
+          </Link>
+
           <Link to="/home" className="flex items-center text-red-500 font-bold p-2 hover:bg-red-100 rounded-lg">
             <FaSignOutAlt className="mr-2" /> Logout
           </Link>
@@ -64,7 +71,7 @@ function AdminDashboard() {
         </div>
 
         {/* Dashboard Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-gradient-to-r from-red-400 to-red-600 p-6 rounded-lg shadow-lg text-white flex flex-col items-center transform hover:scale-105 transition duration-300">
             <FaUsers size={40} />
             <h2 className="text-lg font-semibold mt-3">All Users</h2>
@@ -81,15 +88,15 @@ function AdminDashboard() {
           </div>
           <div className="bg-gradient-to-r from-blue-400 to-blue-600 p-6 rounded-lg shadow-lg text-white flex flex-col items-center transform hover:scale-105 transition duration-300">
             <FaUserEdit size={40} />
-            <h2 className="text-lg font-semibold mt-3">User Form</h2>
-            <Link to="/userfield" className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
+            <h2 className="text-lg font-semibold mt-3">AdminCredentials</h2>
+            <Link to="/admin-credentials" className="mt-3 bg-white text-gray-900 px-4 py-2 rounded shadow-md hover:bg-gray-200 transition">
               Click To See
             </Link>
           </div>
         </div>
 
         {/* Recent Payments Table */}
-        <div className="mt-8 bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+        <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
           <h3 className="text-xl font-semibold mb-4">Recent Payment Records</h3>
           {loading ? (
             <div className="text-center py-4">Loading payments...</div>

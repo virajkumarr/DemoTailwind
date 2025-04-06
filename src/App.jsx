@@ -20,6 +20,8 @@ import AllUser from "./alluser";
 import SubmittedTax from "./submittedtax";
 import UserField from "./userfield";
 import AdminPanel from "./components/AdminPanel";
+import AdminCredential from "./admincredential";
+import FAQSection from "./faqsection";
 
 function App() {
     return (
@@ -49,6 +51,8 @@ function App() {
           <Route path = "subtax" element={<SubmittedTax/>}/> 
           <Route path = "userfield" element={<UserField/>}/> 
           <Route path = "admin-panel" element={<AdminPanel/>}/> 
+          <Route path = "admin-credentials" element={<AdminCredential/>}/> 
+          <Route path = "faq-management" element={<FAQSection/>}/> 
         </Routes>
         < Footer />
         
