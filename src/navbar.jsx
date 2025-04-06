@@ -33,7 +33,7 @@ function Navbar() {
         {/* Logo */}
         <div>
           <img
-            src="../public/img2.jpeg" // Replace with actual logo
+            src="/img2.jpeg" // Corrected image path for public folder
             alt="Liberty Tax Logo"
             className="h-12"
           />
@@ -48,7 +48,11 @@ function Navbar() {
         </button>
 
         {/* Navigation Links */}
-        <nav className={`lg:flex space-x-6 text-lg font-medium text-gray-800 ${isMobileMenuOpen ? "block" : "hidden"} absolute top-full left-0 w-full bg-white lg:static lg:w-auto lg:block`}>
+        <nav
+          className={`${
+            isMobileMenuOpen ? "block" : "hidden"
+          } absolute top-full left-0 w-full bg-white lg:static lg:w-auto lg:block lg:flex space-x-6 text-lg font-medium text-gray-800`}
+        >
           <Link to="/" className="block lg:inline-block px-4 py-2 hover:text-blue-600">
             Home
           </Link>
