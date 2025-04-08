@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { FaSearch, FaTrash, FaEye, FaEyeSlash, FaTachometerAlt, FaGlobe,  FaQuestionCircle, FaSignOutAlt } from "react-icons/fa";
+import { FaSearch, FaTrash, FaEye, FaEyeSlash, FaTachometerAlt, FaGlobe, FaSignOutAlt } from "react-icons/fa";
 
 function AdminCredential() {
   const [credentials, setCredentials] = useState([]);
@@ -139,10 +139,7 @@ function AdminCredential() {
                 <li>
                 </li>
                 <li>
-                  <a href="/admin/faq" className="flex items-center space-x-2 text-gray-600 hover:text-blue-500 p-2 rounded-lg hover:bg-gray-100">
-                    <FaQuestionCircle className="text-gray-500" />
-                    <span>FAQ Management</span>
-                  </a>
+                  
                 </li>
                 <li>
                   <a href="/logout" className="flex items-center space-x-2 text-gray-600 hover:text-blue-500 p-2 rounded-lg hover:bg-gray-100">

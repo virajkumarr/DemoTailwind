@@ -7,21 +7,21 @@ function Home() {
         title: "Annual CIT filing",
         description:
           "We help clients prepare and submit their annual corporate income tax returns along with necessary supporting documents to obtain tax clearance.",
-        image: "../public/img4.jpeg", // Replace with actual image URL
+        image: "../public/img4.jpeg", 
         link: "#",
       },
       {
         title: "Tax Payment services",
         description:
           "We support global clients with Trust Account services for deposit of regular taxes and VAT to Liberian government where clients do not have local signatories and cannot issue cheques.",
-        image: "../public/img5.jpeg", // Replace with actual image URL
+        image: "../public/img5.jpeg", 
         link: "#",
       },
       {
         title: "Personal Tax Returns Preparing & Filing",
         description:
           "Dealing with taxation is a crucial part for Liberians and it can often be complicated. We strive at understanding the client’s situation, so as to minimize taxes.",
-        image: "../public/img6.jpeg", // Replace with actual image URL
+        image: "../public/img6.jpeg", 
         link: "#",
       },
     ];

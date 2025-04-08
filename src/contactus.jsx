@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import { ContactService } from "./models/ContactModel";
 
 function ContactUs() {
   const [formData, setFormData] = useState({
@@ -41,13 +41,10 @@ function ContactUs() {
         throw new Error("Please enter a valid email address");
       }
 
-      // Send data to backend
-      const response = await axios.post("http://localhost:3000/contact/submit", {
-        ...formData,
-        date: new Date().toISOString()
-      });
+      // Send data to backend using the ContactService
+      const response = await ContactService.submitContact(formData);
 
-      if (response.data.success) {
+      if (response.success) {
         setSuccess("Your message has been sent successfully! We'll get back to you soon.");
         setFormData({
           firstName: "",
@@ -58,7 +55,7 @@ function ContactUs() {
           message: ""
         });
       } else {
-        throw new Error(response.data.message || "Failed to send message");
+        throw new Error(response.message || "Failed to send message");
       }
     } catch (err) {
       setError(err.message || "An error occurred while sending your message");

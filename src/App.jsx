@@ -1,6 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import PropTypes from 'prop-types';
 import Home from "./home";
 import LoginPage from "./loginPage";
+import AdminLoginPage from "./adminLogin";
 import Navbar from "./navbar";
 import Footer from "./footer";
 import About from "./about";
@@ -22,41 +24,145 @@ import UserField from "./userfield";
 import AdminPanel from "./components/AdminPanel";
 import AdminCredential from "./admincredential";
 import FAQSection from "./faqsection";
+import Usertaxfiled from "./usertaxfiled";
+import Edituser from "./edituser";
+
+// Protected Route Component for Users
+const ProtectedRoute = ({ children }) => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
+
+// Protected Route Component for Admins
+const AdminProtectedRoute = ({ children }) => {
+  const admin = JSON.parse(localStorage.getItem('admin'));
+  if (!admin) {
+    return <Navigate to="/admin-login" replace />;
+  }
+  return children;
+};
+
+// Add PropTypes validation
+ProtectedRoute.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+AdminProtectedRoute.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 function App() {
-    return (
-      <Router>
-        <Navbar />
-       
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="login" element={<LoginPage />} /> 
-          <Route path = "about" element={<About/>}/>
-          <Route path = "contact" element={<ContactUs/>}/> 
-          <Route path = "newuser" element={<SignUpPage />}/> 
-          <Route path = "admin" element={<AdminDashboard />}/> 
-          <Route path = "userprofile" element={<UserProfile/>}/> 
-          <Route path = "newcomer" element={<Dashboard/>}/> 
-          <Route path = "newlogin" element={<Dashboard/>}/> 
-          <Route path = "paysubmit" element={<TaxPaymentForm/>}/> 
-          <Route path = "Payss" element={<PaymentSuccess/>}/> 
-          <Route path = "home" element={<Home/>}/> 
-          <Route path = "taxoption" element={<TaxOptions/>}/> 
-          <Route path = "admin" element={<AdminDashboard/>}/> 
-          <Route path = "admintaxfile" element={<Admintaxfile/>}/> 
-          <Route path = "adminuser" element={<AdminUsers/>}/>   
-          <Route path = "rules" element={<TaxSlabTable/>}/>  
-          <Route path = "itr" element={<BestPracticesITR/>}/>  
-          <Route path = "alluser" element={<AllUser/>}/> 
-          <Route path = "subtax" element={<SubmittedTax/>}/> 
-          <Route path = "userfield" element={<UserField/>}/> 
-          <Route path = "admin-panel" element={<AdminPanel/>}/> 
-          <Route path = "admin-credentials" element={<AdminCredential/>}/> 
-          <Route path = "faq-management" element={<FAQSection/>}/> 
-        </Routes>
-        < Footer />
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/admin-login" element={<AdminLoginPage />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/newuser" element={<SignUpPage />} />
         
-      </Router>
-    );
-  }
-  export default App;
+        {/* Protected User Routes */}
+        <Route path="/newlogin" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/userprofile" element={
+          <ProtectedRoute>
+            <UserProfile />
+          </ProtectedRoute>
+        } />
+        <Route path="/paysubmit" element={
+          <ProtectedRoute>
+            <TaxPaymentForm />
+          </ProtectedRoute>
+        } />
+        <Route path="/Payss" element={
+          <ProtectedRoute>
+            <PaymentSuccess />
+          </ProtectedRoute>
+        } />
+        <Route path="/taxoption" element={
+          <ProtectedRoute>
+            <TaxOptions />
+          </ProtectedRoute>
+        } />
+        <Route path="/usertaxfiled" element={
+          <ProtectedRoute>
+            <Usertaxfiled />
+          </ProtectedRoute>
+        } />
+        <Route path="/editprofile" element={
+          <ProtectedRoute>
+            <Edituser />
+          </ProtectedRoute>
+        } />
+        
+        {/* Protected Admin Routes */}
+        <Route path="/admin" element={
+          <AdminProtectedRoute>
+            <AdminDashboard />
+          </AdminProtectedRoute>
+        } />
+        <Route path="/admintaxfile" element={
+          <AdminProtectedRoute>
+            <Admintaxfile />
+          </AdminProtectedRoute>
+        } />
+        <Route path="/adminuser" element={
+          <AdminProtectedRoute>
+            <AdminUsers />
+          </AdminProtectedRoute>
+        } />
+        <Route path="/rules" element={
+          <AdminProtectedRoute>
+            <TaxSlabTable />
+          </AdminProtectedRoute>
+        } />
+        <Route path="/itr" element={
+          <AdminProtectedRoute>
+            <BestPracticesITR />
+          </AdminProtectedRoute>
+        } />
+        <Route path="/alluser" element={
+          <AdminProtectedRoute>
+            <AllUser />
+          </AdminProtectedRoute>
+        } />
+        <Route path="/subtax" element={
+          <AdminProtectedRoute>
+            <SubmittedTax />
+          </AdminProtectedRoute>
+        } />
+        <Route path="/userfield" element={
+          <AdminProtectedRoute>
+            <UserField />
+          </AdminProtectedRoute>
+        } />
+        <Route path="/admin-panel" element={
+          <AdminProtectedRoute>
+            <AdminPanel />
+          </AdminProtectedRoute>
+        } />
+        <Route path="/admin-credentials" element={
+          <AdminProtectedRoute>
+            <AdminCredential />
+          </AdminProtectedRoute>
+        } />
+        <Route path="/faq-management" element={
+          <AdminProtectedRoute>
+            <FAQSection />
+          </AdminProtectedRoute>
+        } />
+      </Routes>
+      <Footer />
+    </Router>
+  );
+}
+
+export default App;

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function SignUpPage() {
     const navigate = useNavigate();
@@ -14,6 +15,8 @@ function SignUpPage() {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [loading, setLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -21,6 +24,14 @@ function SignUpPage() {
             ...prevState,
             [name]: value
         }));
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    const toggleConfirmPasswordVisibility = () => {
+        setShowConfirmPassword(!showConfirmPassword);
     };
 
     const handleSubmit = async (e) => {
@@ -159,7 +170,7 @@ function SignUpPage() {
               <div className="relative">
                 <span className="absolute left-3 top-2 text-gray-500">🔒</span>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
@@ -168,13 +179,20 @@ function SignUpPage() {
                   required
                   disabled={loading}
                 />
-                <span className="absolute right-3 top-2 text-gray-500 cursor-pointer">👁️</span>
+                <button 
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-3 top-2 text-gray-500 cursor-pointer focus:outline-none"
+                  disabled={loading}
+                >
+                  {showPassword ? <FaEyeSlash className="text-gray-600" /> : <FaEye className="text-gray-600" />}
+                </button>
               </div>
   
               <div className="relative">
                 <span className="absolute left-3 top-2 text-gray-500">🔒</span>
                 <input
-                  type="password"
+                  type={showConfirmPassword ? "text" : "password"}
                   name="confirmPassword"
                   value={formData.confirmPassword}
                   onChange={handleChange}
@@ -183,7 +201,14 @@ function SignUpPage() {
                   required
                   disabled={loading}
                 />
-                <span className="absolute right-3 top-2 text-gray-500 cursor-pointer">👁️</span>
+                <button 
+                  type="button"
+                  onClick={toggleConfirmPasswordVisibility}
+                  className="absolute right-3 top-2 text-gray-500 cursor-pointer focus:outline-none"
+                  disabled={loading}
+                >
+                  {showConfirmPassword ? <FaEyeSlash className="text-gray-600" /> : <FaEye className="text-gray-600" />}
+                </button>
               </div>
   
               <div className="flex items-center">

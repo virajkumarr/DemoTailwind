@@ -1,69 +1,101 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AdminLoginPage() {
-    return (
-      <div className="mt-20 flex items-center justify-center min-h-screen bg-gray-100 p-4">
-        <div className="flex bg-white shadow-lg rounded-2xl overflow-hidden max-w-4xl w-full">
-          {/* Left Side - Image with Text */}
-          <div className="w-1/2 relative flex items-center justify-center p-6 bg-gray-50">
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    
+    // Define admin credentials
+    const adminCredentials = [
+      { email: "anshuadmin@gmail.com", password: "admin@123" },
+      { email: "buttler@gmail.com", password: "buttler@" },
+      { email: "chisa@gmail.com", password: "chisa@" }
+    ];
+
+    // Check if credentials match any admin account
+    const isValidAdmin = adminCredentials.some(
+      (admin) => admin.email === email && admin.password === password
+    );
+
+    if (isValidAdmin) {
+      localStorage.setItem('admin', JSON.stringify({ email }));
+      navigate('/admin');
+    } else {
+      setError("Invalid email or password");
+    }
+  };
+
+  return (
+    <div className="mt-20 flex items-center justify-center min-h-screen bg-gray-300 p-6">
+      <div className="flex flex-col bg-white shadow-2xl rounded-2xl overflow-hidden max-w-4xl w-full">
+        <div className="flex">
+          {/* Left Side - Image */}
+          <div className="w-1/2 relative flex items-center justify-center p-6 bg-gray-100">
             <img
-              src="../public/admin.jpg"
-              alt="Liberty Tax"
-              className="w-100 mx-auto"
-            
+              src="/admin.jpg"
+              alt="Admin Login"
+              className="w-100 mx-auto rounded-lg shadow-lg"
             />
-            {/* Overlayed Text */}
-            <div className="absolute top-20 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-75 p-2 rounded-lg">
-              <h1 className="text-xl font-bold text-gray-800"></h1>
-            </div>
           </div>
-  
+
           {/* Right Side - Login Form */}
           <div className="w-1/2 p-8">
-          
-            <h2 className="text-3xl font-semibold text-gray-800 text-center mt-4">
-              Login
+            <h2 className="text-3xl font-bold text-gray-800 text-center mt-4 mb-6">
+              Admin Login
             </h2>
-  
-            {/* Input Fields */}
-            <div className="mt-6 space-y-4">
-              <div className="relative">
-                <span className="absolute left-3 top-2 text-gray-500">✉️</span>
+
+            {error && (
+              <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                {error}
+              </div>
+            )}
+
+            <form onSubmit={handleLogin} className="mt-6 space-y-5">
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Email</label>
                 <input
-                  type="text"
-                  placeholder="Email or Phone Here"
-                  className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500"
+                  required
                 />
               </div>
-              <div className="relative">
-                <span className="absolute left-3 top-2 text-gray-500">🔒</span>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Password</label>
                 <input
                   type="password"
-                  placeholder="Password"
-                  className="w-full pl-10 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-red-500 focus:border-red-500"
+                  required
                 />
-                <span className="absolute right-3 top-2 text-gray-500 cursor-pointer">👁️</span>
               </div>
-  
-              <div className="flex items-center">
-                <input type="checkbox" id="remember" className="mr-2" />
-                <label htmlFor="remember" className="text-gray-600 text-sm">
-                  Remember me
-                </label>
-              </div>
-  
-              <Link to= "/admin"className="w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-                Admin Login Here
-              </Link>
+
+              <button
+                type="submit"
+                className="w-full p-3 bg-red-600 text-white rounded-md hover:bg-red-700 text-center block shadow-md transition-all duration-300"
+              >
+                Login
+              </button>
+            </form>
+
+            <div className="mt-4 text-center">
+              <a href="/login" className="text-blue-600 hover:underline">
+                Back to User Login
+              </a>
             </div>
-  
-          
-            
           </div>
         </div>
       </div>
-    )
-  }
-  
-  export default AdminLoginPage;
-  
+    </div>
+  );
+}
+
+export default AdminLoginPage;

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaChartBar, FaTv, FaSignOutAlt } from "react-icons/fa";
+import { FaChartBar, FaTv, FaSignOutAlt, FaCreditCard, FaMobileAlt } from "react-icons/fa";
 import { useState } from "react";
 import axios from "axios";
 
@@ -9,7 +9,9 @@ const TaxPaymentForm = () => {
     email: "",
     taxfileid: "",
     amount: "",
-    paymentdate: ""
+    paymentdate: "",
+    paymentMethod: "card", // Default payment method
+    upiId: "" // UPI ID field
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -38,6 +40,13 @@ const TaxPaymentForm = () => {
         return;
       }
 
+      // Validate UPI ID if UPI payment method is selected
+      if (formData.paymentMethod === "upi" && !formData.upiId) {
+        setError("Please enter a valid UPI ID");
+        setLoading(false);
+        return;
+      }
+
       const response = await axios.post('http://localhost:3000/payment/create', formData);
       
       if (response.data.success) {
@@ -47,7 +56,9 @@ const TaxPaymentForm = () => {
           email: "",
           taxfileid: "",
           amount: "",
-          paymentdate: ""
+          paymentdate: "",
+          paymentMethod: "card",
+          upiId: ""
         });
       } else {
         setError(response.data.message || "Payment submission failed");
@@ -66,7 +77,7 @@ const TaxPaymentForm = () => {
     }
   };
 
-  return (
+  return (  
     <div className="mt-30 flex min-h-screen bg-gray-100">
       {/* Sidebar */}
       <div className="w-1/4 bg-white shadow-lg p-5 flex flex-col justify-between">
@@ -75,8 +86,8 @@ const TaxPaymentForm = () => {
             <img src="../public/img2.jpeg" alt="Liberty Tax" className="w-16 rounded-md" />
           </div>
           <div className="mt-5 flex items-center space-x-3">
-            <img src="../public/chisa.jpg" alt="User" className="w-12 h-12 rounded-full border-2 border-red-500" />
-            <span className="text-lg font-semibold">Welcome, Chisha Kasamanda</span>
+            <img src="../public/profile.jpeg" alt="User" className="w-12 h-12 rounded-full border-2 border-red-500" />
+            <span className="text-lg font-semibold">Welcome , Buttler</span>
           </div>
           <nav className="mt-5 space-y-4">
             <Link to="/newcomer" className="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-200">
@@ -187,6 +198,59 @@ const TaxPaymentForm = () => {
                 disabled={loading}
               />
             </div>
+
+            <div>
+              <label className="block text-gray-700 font-medium">Payment Method</label>
+              <div className="flex space-x-4 mt-2">
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="card"
+                    checked={formData.paymentMethod === "card"}
+                    onChange={handleChange}
+                    className="text-red-500 focus:ring-red-500"
+                    disabled={loading}
+                  />
+                  <span className="flex items-center">
+                    <FaCreditCard className="mr-1 text-gray-600" />
+                    Credit/Debit Card
+                  </span>
+                </label>
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="upi"
+                    checked={formData.paymentMethod === "upi"}
+                    onChange={handleChange}
+                    className="text-red-500 focus:ring-red-500"
+                    disabled={loading}
+                  />
+                  <span className="flex items-center">
+                    <FaMobileAlt className="mr-1 text-gray-600" />
+                    UPI
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            {formData.paymentMethod === "upi" && (
+              <div>
+                <label className="block text-gray-700 font-medium">UPI ID</label>
+                <input
+                  type="text"
+                  className="w-full p-3 border rounded-md focus:ring focus:ring-red-300"
+                  placeholder="Enter UPI ID (e.g., username@upi)"
+                  name="upiId"
+                  value={formData.upiId}
+                  onChange={handleChange}
+                  required={formData.paymentMethod === "upi"}
+                  disabled={loading}
+                />
+                <p className="text-sm text-gray-500 mt-1">Enter your UPI ID to complete the payment</p>
+              </div>
+            )}
 
             <button
               type="submit"

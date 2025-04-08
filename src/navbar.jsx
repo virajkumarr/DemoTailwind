@@ -68,6 +68,9 @@ function Navbar() {
           <Link to="/login" className="block lg:inline-block px-4 py-2 hover:text-blue-600">
             Login/Register
           </Link>
+          <Link to="/admin-login" className="block lg:inline-block px-4 py-2 text-red-600 hover:text-red-700">
+            Admin Login
+          </Link>
         </nav>
       </div>
     </div>

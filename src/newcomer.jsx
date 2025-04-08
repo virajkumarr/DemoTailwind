@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import { FaTachometerAlt, FaGlobe, FaFileAlt, FaPhone } from "react-icons/fa";
+import { FaTachometerAlt, FaGlobe, FaFileAlt, FaPhone, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 
 const Dashboard = () => {
   return (
-    <div className=" mt-30 flex h-screen bg-gray-100">
+    <div className="mt-32 flex h-screen bg-gray-100">
 
       {/* Sidebar Section */}
       <div className="w-72 bg-white p-6 shadow-xl border-r border-gray-200">
@@ -28,22 +28,39 @@ const Dashboard = () => {
         {/* Navigation Links */}
         <nav className="mt-6 space-y-3">
           <Link
-            to=""
+            to="/dashboard"
             className="flex items-center p-3 bg-blue-100 text-blue-600 font-bold rounded-lg shadow-sm hover:bg-blue-200 transition"
           >
             <FaTachometerAlt className="mr-3" /> Dashboard
           </Link>
+
+          <Link
+            to="/editprofile"
+            className="flex items-center p-3 bg-red-100 text-blue-600 font-bold rounded-lg shadow-sm hover:bg-blue-200 transition"
+          >
+            <FaUserCircle className="mr-3" /> Profile
+          </Link>
+
           <Link
             to="/home"
             className="flex items-center p-3 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition"
           >
             <FaGlobe className="mr-3" /> Live Site
           </Link>
+
           <Link
-            to="/adminuser"
+            to="/usertaxfiled"
             className="flex items-center p-3 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition"
           >
             <FaFileAlt className="mr-3" /> My Tax Files
+          </Link>
+
+          <Link
+            to="/home"
+            className="flex items-center space-x-2 p-2 text-red-600 hover:bg-gray-200 rounded-md"
+          >
+            <FaSignOutAlt />
+            <span className="font-semibold">Logout</span>
           </Link>
         </nav>
       </div>
@@ -75,7 +92,7 @@ const Dashboard = () => {
           <img src="/ltax.jpeg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
           <img src="/tax1.jpeg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
           <img src="/tax5.jpeg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
-          <img src="/x3.jpg" alt=" Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
+          <img src="/x3.jpg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
           <img src="/x1.jpg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
           <img src="/x2.jpg" alt="Tax" className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300" />
         </div>

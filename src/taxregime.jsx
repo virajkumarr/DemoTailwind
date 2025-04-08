@@ -1,12 +1,12 @@
 const TaxSlabTable = () => {
   const taxData = [
-    { income: "Up to ₹3 lakh", rate: "Nil", newIncome: "Up to ₹4 lakh", newRate: "Nil" },
-    { income: "₹3 to 7 lakh", rate: "3%", newIncome: "₹4-8 lakh", newRate: "3%" },
-    { income: "₹7 to 10 lakh", rate: "5%", newIncome: "₹8-12 lakh", newRate: "5%" },
-    { income: "₹10 to 12 lakh", rate: "7%", newIncome: "₹12-16 lakh", newRate: "7%" },
-    { income: "₹12 to 15 lakh", rate: "9%", newIncome: "₹16-20 lakh", newRate: "9%" },
-    { income: "Above ₹15 lakh", rate: "10%", newIncome: "₹20-24 lakh", newRate: "10%" },
-    { income: "Above ₹24 lakh", rate: "15%", newIncome: "Above ₹24 lakh", newRate: "15%" }
+    { income: "Up to ₹10 lakh", rate: "Nil", newIncome: "Up to ₹10   lakh", newRate: "Nil" },
+    { income: "₹10 to 15 lakh", rate: "3%", newIncome: "₹0 - 20 lakh", newRate: "3%" },
+    { income: "₹15 to 20 lakh", rate: "5%", newIncome: "₹20 -40 lakh", newRate: "5%" },
+    { income: "₹20 to 25 lakh", rate: "7%", newIncome: "₹40 - 60 lakh", newRate: "7%" },
+    { income: "₹25 to 30 lakh", rate: "9%", newIncome: "₹60 - 80 lakh", newRate: "9%" },
+    { income: "Above ₹30 lakh", rate: "10%", newIncome: "₹up to 1 crore ", newRate: "10%" },
+    { income: "Above ₹40 lakh", rate: "12%", newIncome: "1 crore - ∞", newRate: "12%" }
   ];
 
   return (
@@ -15,9 +15,9 @@ const TaxSlabTable = () => {
       <table className="w-full border-collapse text-left rounded-lg overflow-hidden shadow-md">
         <thead>
           <tr className="bg-blue-600 text-white">
-            <th className="border border-gray-300 p-3">Existing Tax Slabs</th>
+            <th className="border border-gray-300 p-3">Employe Tax</th>
             <th className="border border-gray-300 p-3">Rate of Tax</th>
-            <th className="border border-gray-300 p-3">Proposed Tax Slabs (Budget FY26)</th>
+            <th className="border border-gray-300 p-3">Bussiness Tax</th>
             <th className="border border-gray-300 p-3">Rate of Tax</th>
           </tr>
         </thead>

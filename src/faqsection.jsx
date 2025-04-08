@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaUserShield, FaTachometerAlt, FaGlobe, FaSignOutAlt, FaSearch, FaReply, FaTrash } from "react-icons/fa";
-import axios from "axios";
+import { FAQService } from "./models/FAQModel";
+import { ContactService } from "./models/ContactModel";
 
 function FAQSection() {
   const [questions, setQuestions] = useState([]);
@@ -22,12 +23,8 @@ function FAQSection() {
   const fetchQuestions = async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:3000/faq/questions");
-      if (response.data.success) {
-        setQuestions(response.data.questions);
-      } else {
-        setError("Failed to fetch questions");
-      }
+      const fetchedQuestions = await FAQService.getQuestions();
+      setQuestions(fetchedQuestions);
     } catch (err) {
       console.error("Error fetching questions:", err);
       setError("Error fetching questions. Please try again later.");
@@ -38,12 +35,8 @@ function FAQSection() {
 
   const fetchContactSubmissions = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/contact/submissions");
-      if (response.data.success) {
-        setContactSubmissions(response.data.submissions);
-      } else {
-        console.error("Failed to fetch contact submissions");
-      }
+      const submissions = await ContactService.getContactSubmissions();
+      setContactSubmissions(submissions);
     } catch (err) {
       console.error("Error fetching contact submissions:", err);
     }
@@ -56,11 +49,9 @@ function FAQSection() {
     }
 
     try {
-      const response = await axios.post(`http://localhost:3000/faq/reply/${questionId}`, {
-        reply: replyText
-      });
+      const response = await FAQService.replyToQuestion(questionId, replyText);
 
-      if (response.data.success) {
+      if (response.success) {
         // Update local state with the new reply
         setQuestions(prevQuestions =>
           prevQuestions.map(q =>
@@ -74,7 +65,7 @@ function FAQSection() {
         setSelectedQuestion(null);
         setSuccess("Reply sent successfully!");
       } else {
-        setError(response.data.message || "Failed to send reply");
+        setError(response.message || "Failed to send reply");
       }
     } catch (err) {
       console.error("Error sending reply:", err);
@@ -84,13 +75,13 @@ function FAQSection() {
 
   const handleDelete = async (questionId) => {
     try {
-      const response = await axios.delete(`http://localhost:3000/faq/delete/${questionId}`);
+      const response = await FAQService.deleteQuestion(questionId);
       
-      if (response.data.success) {
+      if (response.success) {
         setQuestions(prevQuestions => prevQuestions.filter(q => q.id !== questionId));
         setSuccess("Question deleted successfully!");
       } else {
-        setError(response.data.message || "Failed to delete question");
+        setError(response.message || "Failed to delete question");
       }
     } catch (err) {
       console.error("Error deleting question:", err);

@@ -1,160 +1,268 @@
-import { FaTachometerAlt, FaGlobe, FaSignOutAlt, FaPhone, FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {  FaTachometerAlt, FaGlobe, FaSignOutAlt, FaSearch, FaEdit, FaTrash } from "react-icons/fa";
 import axios from "axios";
 
-const AdminUsers = () => {
-  const [payments, setPayments] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+function UserAdmin() {
+  const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredPayments, setFilteredPayments] = useState([]);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [editForm, setEditForm] = useState({
+    fullname: "",
+    email: "",
+    mobile: ""
+  });
 
   useEffect(() => {
-    fetchPayments();
+    fetchUsers();
   }, []);
 
-  useEffect(() => {
-    if (searchQuery.trim() === "") {
-      setFilteredPayments(payments);
-    } else {
-      const filtered = payments.filter(payment =>
-        payment.email.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredPayments(filtered);
-    }
-  }, [searchQuery, payments]);
-
-  const fetchPayments = async () => {
+  const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/getfetch/payment');
+      setLoading(true);
+      const response = await axios.get("http://localhost:3000/getalluser");
       if (response.data.success) {
-        setPayments(response.data.payments);
-        setFilteredPayments(response.data.payments);
+        setUsers(response.data.users);
       } else {
-        setError("Failed to fetch payments");
+        setError("Failed to fetch users");
       }
     } catch (err) {
-      console.error('Error fetching payments:', err);
-      setError("Error loading payments. Please try again later.");
+      console.error("Error fetching users:", err);
+      setError("Error fetching users. Please try again later.");
     } finally {
       setLoading(false);
     }
   };
 
+  const handleEdit = (user) => {
+    setSelectedUser(user);
+    setEditForm({
+      fullname: user.fullname,
+      email: user.email,
+      mobile: user.mobile
+    });
+  };
+
+  const handleEditChange = (e) => {
+    const { name, value } = e.target;
+    setEditForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.put(`http://localhost:3000/user/update/${selectedUser._id}`, editForm);
+      if (response.data.success) {
+        setSuccess("User updated successfully!");
+        fetchUsers();
+        setSelectedUser(null);
+      } else {
+        setError(response.data.message || "Failed to update user");
+      }
+    } catch (err) {
+      console.error("Error updating user:", err);
+      setError("Error updating user. Please try again later.");
+    }
+  };
+
+  const handleDelete = async (userId) => {
+    if (window.confirm("Are you sure you want to delete this user?")) {
+      try {
+        const response = await axios.delete(`http://localhost:3000/user/delete/${userId}`);
+        if (response.data.success) {
+          setSuccess("User deleted successfully!");
+          fetchUsers();
+        } else {
+          setError(response.data.message || "Failed to delete user");
+        }
+      } catch (err) {
+        console.error("Error deleting user:", err);
+        setError("Error deleting user. Please try again later.");
+      }
+    }
+  };
+
+  const filteredUsers = users.filter(user =>
+    user.fullname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.mobile.includes(searchQuery)
+  );
+
   return (
-    <div className="mt-30 flex h-screen bg-gray-100">
-
+    <div className="mt-30 flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <div className="w-64 bg-white shadow-xl border-r border-gray-300 p-6">
-        <div className="flex flex-col items-center">
-          <img src="../public/img2.jpeg" alt="Liberty Tax" className="w-32 mb-4 rounded-lg shadow-md" />
-          <p className="text-gray-700 font-semibold">Welcome <span className="font-bold">Varney Butler</span></p>          <p className="text-sm text-gray-500">System Administrator</p>
+      <aside className="w-64 bg-white shadow-xl border-r p-6 flex flex-col items-center">
+        <img src="./img2.jpeg" alt="Logo" className="w-28 mb-4 rounded-lg shadow-md" />
+        <img src="../public/profile.jpeg" alt="Admin" className="w-16 h-16 rounded-full border-4 border-green-400 shadow-md mb-2" />
+        <h2 className="text-lg font-semibold text-gray-800">Varney Butler</h2>
+        <p className="text-sm text-gray-500 mb-6">System Administrator</p>
 
-        </div>
-
-        <nav className="mt-8 space-y-4">
-          <Link to="/newcomer" className="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-100 transition">
-            <FaTachometerAlt className="text-lg" /> <span className="font-medium">Dashboard</span>
+        {/* Navigation */}
+        <nav className="w-full space-y-4">
+          <Link to="/admin" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
+            <FaTachometerAlt className="mr-2" /> Dashboard
+          </Link>
+          <Link to="/home" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
+            <FaGlobe className="mr-2" /> Live Site
           </Link>
 
-          <Link to="/home" className="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-100 transition">
-            <FaGlobe className="text-lg" /> <span className="font-medium">Live Site</span>
-          </Link>
-
-         
-          <Link to="/home" className="flex items-center space-x-3 p-3 rounded-lg text-red-600 font-bold hover:bg-red-100 transition">
-            <FaSignOutAlt className="text-lg" /> <span>Logout</span>
+          <Link to="/home" className="flex items-center text-red-500 font-bold p-2 hover:bg-red-100 rounded-lg">
+            <FaSignOutAlt className="mr-2" /> Logout
           </Link>
         </nav>
-      </div>
+      </aside>
 
       {/* Main Content */}
-      <div className="flex-1 p-6">
+      <main className="flex-1 p-8">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="text-2xl font-bold mb-6">User Management</h1>
 
-        {/* Header */}
-        <div className="flex justify-between items-center bg-white p-4 shadow-md rounded-lg">
-          <div className="flex items-center space-x-2 text-blue-600">
-            <FaPhone />
-            <span className="text-gray-800 font-semibold">+91 7600300778</span>
+          {/* Search Bar */}
+          <div className="mb-6">
+            <div className="relative">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search by name, email, or mobile..."
+                className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+              <FaSearch className="absolute left-3 top-3 text-gray-400" />
+            </div>
           </div>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-            User: Admin
-          </button>
+
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
+              {error}
+            </div>
+          )}
+
+          {success && (
+            <div className="mb-4 p-3 bg-green-100 text-green-700 rounded-lg">
+              {success}
+            </div>
+          )}
+
+          {/* Users List */}
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="p-6">
+              <h2 className="text-xl font-semibold mb-4">Registered Users</h2>
+              {loading ? (
+                <p className="text-gray-500 text-center py-4">Loading users...</p>
+              ) : filteredUsers.length === 0 ? (
+                <p className="text-gray-500 text-center py-4">
+                  {searchQuery ? "No users found matching your search." : "No users registered yet."}
+                </p>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="bg-gray-50">
+                        <th className="p-3 text-left border-b">Name</th>
+                        <th className="p-3 text-left border-b">Email</th>
+                        <th className="p-3 text-left border-b">Mobile</th>
+                        <th className="p-3 text-left border-b">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {filteredUsers.map((user) => (
+                        <tr key={user._id} className="hover:bg-gray-50">
+                          <td className="p-3 border-b">{user.fullname}</td>
+                          <td className="p-3 border-b">{user.email}</td>
+                          <td className="p-3 border-b">{user.mobile}</td>
+                          <td className="p-3 border-b">
+                            <div className="flex space-x-2">
+                              <button
+                                onClick={() => handleEdit(user)}
+                                className="text-blue-500 hover:text-blue-700"
+                              >
+                                <FaEdit />
+                              </button>
+                              <button
+                                onClick={() => handleDelete(user._id)}
+                                className="text-red-500 hover:text-red-700"
+                              >
+                                <FaTrash />
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Edit User Modal */}
+          {selectedUser && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+              <div className="bg-white rounded-lg p-6 max-w-md w-full">
+                <h2 className="text-xl font-semibold mb-4">Edit User</h2>
+                <form onSubmit={handleEditSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">Name</label>
+                    <input
+                      type="text"
+                      name="fullname"
+                      value={editForm.fullname}
+                      onChange={handleEditChange}
+                      className="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={editForm.email}
+                      onChange={handleEditChange}
+                      className="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">Mobile</label>
+                    <input
+                      type="text"
+                      name="mobile"
+                      value={editForm.mobile}
+                      onChange={handleEditChange}
+                      className="mt-1 w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      required
+                    />
+                  </div>
+                  <div className="flex justify-end space-x-2 mt-6">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedUser(null)}
+                      className="px-4 py-2 text-gray-600 hover:text-gray-800"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="submit"
+                      className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    >
+                      Save Changes
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
         </div>
-
-        {/* Search Bar */}
-        <div className="mt-6 mb-4">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search by email..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full p-3 pl-10 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            />
-            <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-          </div>
-        </div>
-
-        {/* Title */}
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-4 border-b-2 border-blue-500 pb-2">
-          All Users
-        </h2>
-
-        {/* Loading and Error States */}
-        {loading && (
-          <div className="text-center py-4">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500 mx-auto"></div>
-            <p className="mt-2 text-gray-600">Loading payments...</p>
-          </div>
-        )}
-
-        {error && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-            <span className="block sm:inline">{error}</span>
-          </div>
-        )}
-
-        {/* Table */}
-        {!loading && !error && (
-          <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <table className="w-full border-collapse">
-              <thead className="bg-blue-600 text-white">
-                <tr>
-                  <th className="p-3">Name</th>
-                  <th className="p-3">Email</th>
-                  <th className="p-3">Tax File ID</th>
-                  <th className="p-3">Amount</th>
-                  <th className="p-3">Payment Date</th>
-                </tr>
-              </thead>
-              <tbody className="text-gray-700 text-center">
-                {filteredPayments.length === 0 ? (
-                  <tr>
-                    <td colSpan="5" className="p-4 text-gray-500">
-                      No payments found
-                    </td>
-                  </tr>
-                ) : (
-                  filteredPayments.map((payment) => (
-                    <tr key={payment._id} className="border-t hover:bg-gray-50 transition">
-                      <td className="p-3">{payment.username}</td>
-                      <td className="p-3">{payment.email}</td>
-                      <td className="p-3">{payment.taxfileid}</td>
-                      <td className="p-3">₹{payment.amount}</td>
-                      <td className="p-3">{new Date(payment.paymentdate).toLocaleDateString()}</td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        )}
-
-      </div>
+      </main>
     </div>
   );
-};
+}
 
-export default AdminUsers;
+export default UserAdmin; 
