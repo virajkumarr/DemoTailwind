@@ -125,13 +125,13 @@ function AdminCredential() {
             <nav>
               <ul className="space-y-2">
                 <li>
-                  <a href="/admin" className="flex items-center space-x-2 text-gray-600 hover:text-blue-500 p-2 rounded-lg hover:bg-gray-100">
+                  <a href="/admin" className="flex items-center space-x-2 text-gray-600 hover:text-blue-500 p-2 rounded-lg hover:bg-green-200">
                     <FaTachometerAlt className="text-gray-500" />
                     <span>Dashboard</span>
                   </a>
                 </li>
                 <li>
-                  <a href="/" className="flex items-center space-x-2 text-gray-600 hover:text-blue-500 p-2 rounded-lg hover:bg-gray-100">
+                  <a href="/" className="flex items-center space-x-2 text-gray-600 hover:text-blue-500 p-2 rounded-lg hover:bg-blue-200">
                     <FaGlobe className="text-gray-500" />
                     <span>Live Site</span>
                   </a>
@@ -142,7 +142,7 @@ function AdminCredential() {
                   
                 </li>
                 <li>
-                  <a href="/logout" className="flex items-center space-x-2 text-gray-600 hover:text-blue-500 p-2 rounded-lg hover:bg-gray-100">
+                  <a href="/" className="flex items-center space-x-2 text-gray-600 hover:text-blue-500 p-2 rounded-lg hover:bg-red-200">
                     <FaSignOutAlt className="text-gray-500" />
                     <span>Logout</span>
                   </a>

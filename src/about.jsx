@@ -1,6 +1,7 @@
 
 
 import { FaClock, FaUser, FaLock, FaHeart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function About() {
     const services = [
@@ -155,9 +156,10 @@ function About() {
                 />
                 <h3 className="text-xl font-bold mb-2">{service.title}</h3>
                 <p className="text-gray-700">{service.description}</p>
-                <a href={service.link} className="text-blue-600 font-semibold mt-4 inline-block">
+                <Link to="/itr"><a href={service.link} className="text-blue-600 font-semibold mt-4 inline-block">
                   More
                 </a>
+                </Link>
               </div>
             ))}
           </div>

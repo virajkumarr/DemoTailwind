@@ -71,8 +71,7 @@ function SubmittedTax() {
       {/* Sidebar */}
       <aside className="w-64 bg-white shadow-xl border-r p-6 flex flex-col items-center">
         <img src="./img2.jpeg" alt="Logo" className="w-28 mb-4 rounded-lg shadow-md" />
-        <img src="../public/profile.jpeg" alt="Admin" className="w-16 h-16 rounded-full border-4 border-green-400 shadow-md mb-2" />
-        <h2 className="text-lg font-semibold text-gray-800">Varney Butler</h2>
+        <img src="../public/adminprofile.jpg" alt="Admin" className="w-16 h-16 rounded-full border-4 border-green-400 shadow-md mb-2" />
         <p className="text-sm text-gray-500 mb-6">System Administrator</p>
 
         {/* Navigation */}

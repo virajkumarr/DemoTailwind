@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { FaChartBar, FaTv, FaSignOutAlt, FaCreditCard, FaMobileAlt } from "react-icons/fa";
-import { useState } from "react";
+import { FaChartBar, FaTv, FaSignOutAlt, FaCreditCard, FaMobileAlt, FaQrcode } from "react-icons/fa";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const TaxPaymentForm = () => {
@@ -10,12 +10,27 @@ const TaxPaymentForm = () => {
     taxfileid: "",
     amount: "",
     paymentdate: "",
+    paymenttime: "",
     paymentMethod: "card", // Default payment method
-    upiId: "" // UPI ID field
+    upiId: "", // UPI ID field
+    qrReference: "" // QR code reference number
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+
+  // Set current date and time when component mounts
+  useEffect(() => {
+    const now = new Date();
+    const currentDate = now.toISOString().split('T')[0];
+    const currentTime = now.toTimeString().split(' ')[0].substring(0, 5);
+    
+    setFormData(prev => ({
+      ...prev,
+      paymentdate: currentDate,
+      paymenttime: currentTime
+    }));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -57,8 +72,10 @@ const TaxPaymentForm = () => {
           taxfileid: "",
           amount: "",
           paymentdate: "",
+          paymenttime: "",
           paymentMethod: "card",
-          upiId: ""
+          upiId: "",
+          qrReference: ""
         });
       } else {
         setError(response.data.message || "Payment submission failed");
@@ -90,7 +107,7 @@ const TaxPaymentForm = () => {
             <span className="text-lg font-semibold">Welcome , Buttler</span>
           </div>
           <nav className="mt-5 space-y-4">
-            <Link to="/newcomer" className="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-200">
+            <Link to="/newlogin" className="flex items-center space-x-2 p-2 rounded-md hover:bg-gray-200">
               <FaChartBar className="text-blue-600" />
               <span className="font-semibold">Dashboard</span>
             </Link>
@@ -187,16 +204,31 @@ const TaxPaymentForm = () => {
 
             <div>
               <label className="block text-gray-700 font-medium">Payment Date</label>
-              <input
-                type="date"
-                className="w-full p-3 border rounded-md focus:ring focus:ring-red-300"
-                placeholder="Enter Payment Date Here"
-                name="paymentdate"
-                value={formData.paymentdate}
-                onChange={handleChange}
-                required
-                disabled={loading}
-              />
+              <div className="flex space-x-4">
+                <div className="flex-1">
+                  <input
+                    type="date"
+                    className="w-full p-3 border rounded-md focus:ring focus:ring-red-300"
+                    name="paymentdate"
+                    value={formData.paymentdate}
+                    onChange={handleChange}
+                    required
+                    disabled={loading}
+                  />
+                </div>
+                <div className="flex-1">
+                  <input
+                    type="time"
+                    className="w-full p-3 border rounded-md focus:ring focus:ring-red-300"
+                    name="paymenttime"
+                    value={formData.paymenttime}
+                    onChange={handleChange}
+                    required
+                    disabled={loading}
+                  />
+                </div>
+              </div>
+              <p className="text-sm text-gray-500 mt-1">Current date and time are automatically set</p>
             </div>
 
             <div>
@@ -232,6 +264,21 @@ const TaxPaymentForm = () => {
                     UPI
                   </span>
                 </label>
+                <label className="flex items-center space-x-2 cursor-pointer">
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="qr"
+                    checked={formData.paymentMethod === "qr"}
+                    onChange={handleChange}
+                    className="text-red-500 focus:ring-red-500"
+                    disabled={loading}
+                  />
+                  <span className="flex items-center">
+                    <FaQrcode className="mr-1 text-gray-600" />
+                    QR Code
+                  </span>
+                </label>
               </div>
             </div>
 
@@ -249,6 +296,34 @@ const TaxPaymentForm = () => {
                   disabled={loading}
                 />
                 <p className="text-sm text-gray-500 mt-1">Enter your UPI ID to complete the payment</p>
+              </div>
+            )}
+
+            {formData.paymentMethod === "qr" && (
+              <div className="space-y-4">
+                <div className="flex justify-center">
+                  <div className="bg-gray-100 p-4 rounded-lg">
+                    <img 
+                      src="/qrcodejpg.jpg" 
+                      alt="Payment QR Code" 
+                      className="w-48 h-48 mx-auto"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-gray-700 font-medium">QR Payment UTR Number</label>
+                  <input
+                    type="text"
+                    className="w-full p-3 border rounded-md focus:ring focus:ring-red-300"
+                    placeholder="Enter the reference number after scanning QR"
+                    name="qrReference"
+                    value={formData.qrReference}
+                    onChange={handleChange}
+                    required={formData.paymentMethod === "qr"}
+                    disabled={loading}
+                  />
+                  <p className="text-sm text-gray-500 mt-1">Please scan the QR code and enter the reference number from your payment</p>
+                </div>
               </div>
             )}
 

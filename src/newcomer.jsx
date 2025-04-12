@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaTachometerAlt, FaGlobe, FaFileAlt, FaPhone, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
 
-const Dashboard = () => {
+const UserDashboard = () => {
   return (
     <div className="mt-32 flex h-screen bg-gray-100">
 
@@ -36,7 +36,7 @@ const Dashboard = () => {
 
           <Link
             to="/editprofile"
-            className="flex items-center p-3 bg-red-100 text-blue-600 font-bold rounded-lg shadow-sm hover:bg-blue-200 transition"
+            className="flex items-center p-3 bg-green-200 text-blue-600 font-bold rounded-lg shadow-sm hover:bg-pink-200 transition"
           >
             <FaUserCircle className="mr-3" /> Profile
           </Link>
@@ -102,4 +102,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default UserDashboard;

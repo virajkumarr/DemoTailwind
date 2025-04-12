@@ -14,7 +14,8 @@ function AdminLoginPage() {
     const adminCredentials = [
       { email: "anshuadmin@gmail.com", password: "admin@123" },
       { email: "buttler@gmail.com", password: "buttler@" },
-      { email: "chisa@gmail.com", password: "chisa@" }
+      { email: "chisa@gmail.com", password: "chisa@" },
+      {email: "viraj@gmail.com", password: "viraj@"}
     ];
 
     // Check if credentials match any admin account
