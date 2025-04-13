@@ -3,6 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function LoginPage() {
+<<<<<<< HEAD
+=======
+  const [isAdmin, setIsAdmin] = useState(false);
+>>>>>>> d082174 (model)
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -25,6 +29,7 @@ function LoginPage() {
     setLoading(true);
 
     try {
+<<<<<<< HEAD
       const response = await axios.post('http://localhost:3000/user/login', {
         email: formData.email,
         password: formData.password
@@ -35,12 +40,31 @@ function LoginPage() {
         localStorage.setItem('user', JSON.stringify(response.data.user));
         // Redirect to dashboard
         navigate('/newlogin');
+=======
+      const response = await axios.post('http://localhost:3000/user/login', formData);
+      
+      if (response.data.success) {
+        // Store user data in localStorage
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+        // Redirect based on user type
+        navigate(isAdmin ? "/admin" : "/newlogin");
+>>>>>>> d082174 (model)
       } else {
         setError(response.data.message || "Login failed");
       }
     } catch (err) {
       console.error('Login error:', err);
+<<<<<<< HEAD
       setError(err.response?.data?.message || "An error occurred during login");
+=======
+      if (err.response) {
+        setError(err.response.data.message || "Login failed");
+      } else if (err.request) {
+        setError("No response from server. Please check if the server is running.");
+      } else {
+        setError("Error setting up the request. Please try again.");
+      }
+>>>>>>> d082174 (model)
     } finally {
       setLoading(false);
     }
@@ -80,9 +104,16 @@ function LoginPage() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
+<<<<<<< HEAD
                   placeholder="Email Here"
                   className="w-full pl-10 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
                   required
+=======
+                  placeholder="Email"
+                  className="w-full pl-10 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
+                  required
+                  disabled={loading}
+>>>>>>> d082174 (model)
                 />
               </div>
               <div className="relative">
@@ -95,6 +126,10 @@ function LoginPage() {
                   placeholder="Password"
                   className="w-full pl-10 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
                   required
+<<<<<<< HEAD
+=======
+                  disabled={loading}
+>>>>>>> d082174 (model)
                 />
               </div>
 
@@ -107,12 +142,21 @@ function LoginPage() {
 
               <button
                 type="submit"
+<<<<<<< HEAD
                 disabled={loading}
                 className={`w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-center block shadow-md transition-all duration-300 ${
                   loading ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
               >
                 {loading ? 'Logging in...' : 'Login Here'}
+=======
+                className={`w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-center block shadow-md transition-all duration-300 ${
+                  loading ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+                disabled={loading}
+              >
+                {loading ? 'Logging in...' : (isAdmin ? 'Admin Login Here' : 'Login Here')}
+>>>>>>> d082174 (model)
               </button>
             </form>
 
