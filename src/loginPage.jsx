@@ -3,16 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function LoginPage() {
-<<<<<<< HEAD
-=======
-  const [isAdmin, setIsAdmin] = useState(false);
->>>>>>> d082174 (model)
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false); // For toggling user/admin login
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -29,34 +26,16 @@ function LoginPage() {
     setLoading(true);
 
     try {
-<<<<<<< HEAD
-      const response = await axios.post('http://localhost:3000/user/login', {
-        email: formData.email,
-        password: formData.password
-      });
+      const response = await axios.post('http://localhost:3000/user/login', formData);
 
       if (response.data.success) {
-        // Store user data in localStorage
         localStorage.setItem('user', JSON.stringify(response.data.user));
-        // Redirect to dashboard
-        navigate('/newlogin');
-=======
-      const response = await axios.post('http://localhost:3000/user/login', formData);
-      
-      if (response.data.success) {
-        // Store user data in localStorage
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        // Redirect based on user type
         navigate(isAdmin ? "/admin" : "/newlogin");
->>>>>>> d082174 (model)
       } else {
         setError(response.data.message || "Login failed");
       }
     } catch (err) {
-      console.error('Login error:', err);
-<<<<<<< HEAD
-      setError(err.response?.data?.message || "An error occurred during login");
-=======
+      console.error("Login error:", err);
       if (err.response) {
         setError(err.response.data.message || "Login failed");
       } else if (err.request) {
@@ -64,7 +43,6 @@ function LoginPage() {
       } else {
         setError("Error setting up the request. Please try again.");
       }
->>>>>>> d082174 (model)
     } finally {
       setLoading(false);
     }
@@ -86,7 +64,7 @@ function LoginPage() {
           {/* Right Side - Login Form */}
           <div className="w-1/2 p-8">
             <h2 className="text-3xl font-bold text-gray-800 text-center mt-4 mb-6">
-              User Login
+              {isAdmin ? "Admin Login" : "User Login"}
             </h2>
 
             {error && (
@@ -95,7 +73,6 @@ function LoginPage() {
               </div>
             )}
 
-            {/* Input Fields */}
             <form onSubmit={handleSubmit} className="mt-6 space-y-5">
               <div className="relative">
                 <span className="absolute left-3 top-3 text-gray-500">✉️</span>
@@ -104,16 +81,10 @@ function LoginPage() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-<<<<<<< HEAD
-                  placeholder="Email Here"
-                  className="w-full pl-10 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
-                  required
-=======
                   placeholder="Email"
                   className="w-full pl-10 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
                   required
                   disabled={loading}
->>>>>>> d082174 (model)
                 />
               </div>
               <div className="relative">
@@ -126,37 +97,36 @@ function LoginPage() {
                   placeholder="Password"
                   className="w-full pl-10 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
                   required
-<<<<<<< HEAD
-=======
                   disabled={loading}
->>>>>>> d082174 (model)
                 />
               </div>
 
-              <div className="flex items-center">
-                <input type="checkbox" id="remember" className="mr-2" />
-                <label htmlFor="remember" className="text-gray-600 text-sm">
+              <div className="flex items-center justify-between">
+                <label className="flex items-center text-gray-600 text-sm">
+                  <input type="checkbox" className="mr-2" />
                   Remember me
+                </label>
+
+                {/* Admin Toggle */}
+                <label className="flex items-center text-sm text-gray-700 font-medium">
+                  <input
+                    type="checkbox"
+                    checked={isAdmin}
+                    onChange={() => setIsAdmin(prev => !prev)}
+                    className="mr-2"
+                  />
+                  Admin Login
                 </label>
               </div>
 
               <button
                 type="submit"
-<<<<<<< HEAD
-                disabled={loading}
                 className={`w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-center block shadow-md transition-all duration-300 ${
-                  loading ? 'opacity-50 cursor-not-allowed' : ''
-                }`}
-              >
-                {loading ? 'Logging in...' : 'Login Here'}
-=======
-                className={`w-full p-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-center block shadow-md transition-all duration-300 ${
-                  loading ? 'opacity-50 cursor-not-allowed' : ''
+                  loading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
                 disabled={loading}
               >
-                {loading ? 'Logging in...' : (isAdmin ? 'Admin Login Here' : 'Login Here')}
->>>>>>> d082174 (model)
+                {loading ? "Logging in..." : isAdmin ? "Admin Login" : "Login"}
               </button>
             </form>
 
@@ -164,8 +134,6 @@ function LoginPage() {
               <Link to="/newuser" className="hover:underline text-blue-700 font-semibold">
                 New User? Sign up
               </Link>
-
-              
             </div>
           </div>
         </div>
