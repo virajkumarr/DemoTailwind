@@ -29,7 +29,7 @@ function Home() {
     return (
       <div
         className="bg-cover bg-center bg-no-repeat text-black py-16"
-        style={{ backgroundImage: "url('/img21.jpeg')" }} // Replace with your actual image path
+        style={{ backgroundImage: "url('/img21.jpeg')" }} 
       >
         <div className="bg-white bg-opacity-80 min-h-screen flex items-center justify-center">
           <div className="container mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center">
@@ -51,7 +51,7 @@ function Home() {
             {/* Right Side - Image */}
             <div className="w-full md:w-1/2 flex justify-center mt-8 md:mt-0">
               <img
-                src="/img22.jpg"  // Replace with actual image path
+                src="/img22.jpg"  
                 alt="Professional Man"
                 className="w-80 md:w-96 object-cover"
               />

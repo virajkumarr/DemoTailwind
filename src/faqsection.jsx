@@ -100,8 +100,8 @@ function FAQSection() {
       {/* Sidebar */}
       <aside className="w-64 bg-white shadow-xl border-r p-6 flex flex-col items-center">
         <img src="./img2.jpeg" alt="Logo" className="w-28 mb-4 rounded-lg shadow-md" />
-        <img src="../public/profile.jpeg" alt="Admin" className="w-16 h-16 rounded-full border-4 border-green-400 shadow-md mb-2" />
-        <h2 className="text-lg font-semibold text-gray-800">Varney Butler</h2>
+        <img src="../public/adminprofile.jpg" alt="Admin" className="w-16 h-16 rounded-full border-4 border-green-400 shadow-md mb-2" />
+      
         <p className="text-sm text-gray-500 mb-6">System Administrator</p>
 
         {/* Navigation */}
@@ -109,13 +109,13 @@ function FAQSection() {
           <Link to="/admin" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
             <FaTachometerAlt className="mr-2" /> Dashboard
           </Link>
-          <Link to="/home" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
+          <Link to="/" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
             <FaGlobe className="mr-2" /> Live Site
           </Link>
           <Link to="/faq-management" className="flex items-center text-green-600 font-bold p-2 hover:bg-green-100 rounded-lg">
             <FaUserShield className="mr-2" /> FAQ Management
           </Link>
-          <Link to="/home" className="flex items-center text-red-500 font-bold p-2 hover:bg-red-100 rounded-lg">
+          <Link to="/" className="flex items-center text-red-500 font-bold p-2 hover:bg-red-100 rounded-lg">
             <FaSignOutAlt className="mr-2" /> Logout
           </Link>
         </nav>

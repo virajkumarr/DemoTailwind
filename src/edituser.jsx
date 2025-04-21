@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import  { useState, useEffect } from "react";
 import {
   FaUserCircle,
   FaEdit,
@@ -6,15 +6,16 @@ import {
   FaSave,
   FaEye,
   FaEyeSlash,
+  FaCamera,
 } from "react-icons/fa";
+import axios from "axios";
 
 const UserProfile = () => {
   const [user, setUser] = useState({
-    userId: "U123456", // never editable
-    name: "anshu raj",
-    email: "anshu@example.com",
-    phone: "9876543217",
-    password: "anshu@123",
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
     profilePic: "",
   });
 
@@ -22,6 +23,43 @@ const UserProfile = () => {
   const [tempUser, setTempUser] = useState(user);
   const [deleted, setDeleted] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+        if (storedUser) {
+          const response = await axios.get("http://localhost:3000/getalluser");
+          if (response.data.success) {
+            const userData = response.data.users.find(u => u.email === storedUser.email);
+            if (userData) {
+              setUser({
+                name: userData.fullname,
+                email: userData.email,
+                phone: userData.mobile,
+                password: "********",
+                profilePic: "",
+              });
+              setTempUser({
+                name: userData.fullname,
+                email: userData.email,
+                phone: userData.mobile,
+                password: "********",
+                profilePic: "",
+              });
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   const handleEdit = () => {
     setTempUser(user);
@@ -30,19 +68,41 @@ const UserProfile = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    // Prevent updates to userId
-    if (name === "userId") return;
     setTempUser({ ...tempUser, [name]: value });
   };
 
-  const handleSave = () => {
-    // Keep userId unchanged
-    setUser({ ...tempUser, userId: user.userId });
-    setEditing(false);
+  const handleSave = async () => {
+    try {
+      const response = await axios.put(`http://localhost:3000/user/update/${user.email}`, {
+        fullname: tempUser.name,
+        email: tempUser.email,
+        mobile: tempUser.phone,
+      });
+
+      if (response.data.success) {
+        setUser(tempUser);
+        setEditing(false);
+        localStorage.setItem('user', JSON.stringify({
+          fullname: tempUser.name,
+          email: tempUser.email,
+          mobile: tempUser.phone,
+        }));
+      }
+    } catch (error) {
+      console.error("Error updating user:", error);
+    }
   };
 
-  const handleDelete = () => {
-    setDeleted(true);
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(`http://localhost:3000/user/delete/${user.email}`);
+      if (response.data.success) {
+        localStorage.removeItem('user');
+        setDeleted(true);
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
   };
 
   const handleProfilePicChange = (e) => {
@@ -53,146 +113,151 @@ const UserProfile = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
   if (deleted) {
     return (
-      <div className="h-screen flex items-center justify-center text-xl text-red-500 font-semibold">
-        Profile Deleted
+      <div className="h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-4xl text-red-500 mb-4">Profile Deleted</div>
+          <p className="text-gray-600">Your profile has been successfully deleted.</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="mt-10 min-h-screen bg-gradient-to-r from-blue-100 to-purple-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-xl bg-white shadow-xl rounded-2xl p-6 space-y-6">
-        {/* Profile Header */}
-        <div className="flex flex-col items-center text-center">
-          {tempUser.profilePic ? (
-            <img
-              src={tempUser.profilePic}
-              alt="Profile"
-              className="w-24 h-24 rounded-full object-cover border-2 border-blue-400"
-            />
-          ) : (
-            <FaUserCircle className="text-6xl text-gray-400" />
-          )}
-          <label className="mt-2 text-sm text-blue-600 cursor-pointer">
-            Change Photo
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleProfilePicChange}
-              className="hidden"
-            />
-          </label>
-          <h2 className="text-2xl font-bold mt-2">User Profile</h2>
-        </div>
-
-        {/* Form Fields */}
-        <div className="space-y-4">
-          {/* User ID (never editable) */}
-          <div>
-            <label className="text-sm font-semibold">User ID</label>
-            <input
-              type="text"
-              name="userId"
-              value={user.userId}
-              readOnly
-              className="w-full border border-gray-300 p-2 rounded mt-1 bg-gray-100 text-gray-500"
-            />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 py-12 px-4 sm:px-6 lg:px-8 mt-20">
+      <div className="max-w-3xl mx-auto">
+        <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+          {/* Profile Header */}
+          <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-center">
+            <div className="relative inline-block">
+              {tempUser.profilePic ? (
+                <img
+                  src={tempUser.profilePic}
+                  alt="Profile"
+                  className="w-32 h-32 rounded-full object-cover border-4 border-white shadow-lg"
+                />
+              ) : (
+                <FaUserCircle className="w-32 h-32 text-white" />
+              )}
+              <label className="absolute bottom-0 right-0 bg-white rounded-full p-2 shadow-md cursor-pointer hover:bg-gray-100 transition">
+                <FaCamera className="text-blue-500" />
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleProfilePicChange}
+                  className="hidden"
+                />
+              </label>
+            </div>
+            <h2 className="text-2xl font-bold text-white mt-4">User Profile</h2>
           </div>
 
-          {/* Name */}
-          <div>
-            <label className="text-sm font-semibold">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={tempUser.name}
-              onChange={handleChange}
-              readOnly={!editing}
-              className={`w-full border ${
-                editing ? "border-blue-400" : "border-gray-300"
-              } p-2 rounded mt-1 focus:outline-none`}
-            />
-          </div>
-
-          {/* Email */}
-          <div>
-            <label className="text-sm font-semibold">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={tempUser.email}
-              onChange={handleChange}
-              readOnly={!editing}
-              className={`w-full border ${
-                editing ? "border-blue-400" : "border-gray-300"
-              } p-2 rounded mt-1 focus:outline-none`}
-            />
-          </div>
-
-          {/* Phone */}
-          <div>
-            <label className="text-sm font-semibold">Mobile</label>
-            <input
-              type="text"
-              name="phone"
-              value={tempUser.phone}
-              onChange={handleChange}
-              readOnly={!editing}
-              className={`w-full border ${
-                editing ? "border-blue-400" : "border-gray-300"
-              } p-2 rounded mt-1 focus:outline-none`}
-            />
-          </div>
-
-          {/* Password with Show/Hide toggle */}
-          <div>
-            <label className="text-sm font-semibold">Password</label>
-            <div className="relative">
+          {/* Form Fields */}
+          <div className="p-8 space-y-6">
+            {/* Name */}
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-gray-600">Full Name</label>
               <input
-                type={showPassword ? "text" : "password"}
-                name="password"
-                value={tempUser.password}
+                type="text"
+                name="name"
+                value={tempUser.name}
                 onChange={handleChange}
                 readOnly={!editing}
-                className={`w-full border ${
-                  editing ? "border-blue-400" : "border-gray-300"
-                } p-2 pr-10 rounded mt-1 focus:outline-none`}
+                className={`w-full p-3 rounded-lg border ${
+                  editing ? "border-blue-400 focus:ring-2 focus:ring-blue-400" : "border-gray-200"
+                } focus:outline-none transition`}
               />
-              <span
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 cursor-pointer"
-              >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </span>
+            </div>
+
+            {/* Email */}
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-gray-600">Email Address</label>
+              <input
+                type="email"
+                name="email"
+                value={tempUser.email}
+                onChange={handleChange}
+                readOnly={!editing}
+                className={`w-full p-3 rounded-lg border ${
+                  editing ? "border-blue-400 focus:ring-2 focus:ring-blue-400" : "border-gray-200"
+                } focus:outline-none transition`}
+              />
+            </div>
+
+            {/* Phone */}
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-gray-600">Mobile Number</label>
+              <input
+                type="text"
+                name="phone"
+                value={tempUser.phone}
+                onChange={handleChange}
+                readOnly={!editing}
+                className={`w-full p-3 rounded-lg border ${
+                  editing ? "border-blue-400 focus:ring-2 focus:ring-blue-400" : "border-gray-200"
+                } focus:outline-none transition`}
+              />
+            </div>
+
+            {/* Password */}
+            <div className="space-y-2">
+              <label className="text-sm font-semibold text-gray-600">Password</label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  value={tempUser.password}
+                  onChange={handleChange}
+                  readOnly={!editing}
+                  className={`w-full p-3 rounded-lg border ${
+                    editing ? "border-blue-400 focus:ring-2 focus:ring-blue-400" : "border-gray-200"
+                  } focus:outline-none transition pr-10`}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                  title={showPassword ? "Hide Password" : "Show Password"}
+                >
+                  {showPassword ? <FaEyeSlash className="text-lg" /> : <FaEye className="text-lg" />}
+                </button>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Buttons */}
-        <div className="flex justify-between mt-6">
-          {editing ? (
+          {/* Buttons */}
+          <div className="px-8 py-6 bg-gray-50 flex justify-between">
+            {editing ? (
+              <button
+                onClick={handleSave}
+                className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow-md transition duration-300"
+              >
+                <FaSave /> Save Changes
+              </button>
+            ) : (
+              <button
+                onClick={handleEdit}
+                className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md transition duration-300"
+              >
+                <FaEdit /> Edit Profile
+              </button>
+            )}
             <button
-              onClick={handleSave}
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded flex items-center gap-2"
+              onClick={handleDelete}
+              className="flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg shadow-md transition duration-300"
             >
-              <FaSave /> Save
+              <FaTrash /> Delete Account
             </button>
-          ) : (
-            <button
-              onClick={handleEdit}
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded flex items-center gap-2"
-            >
-              <FaEdit /> Edit
-            </button>
-          )}
-          <button
-            onClick={handleDelete}
-            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded flex items-center gap-2"
-          >
-            <FaTrash /> Delete
-          </button>
+          </div>
         </div>
       </div>
     </div>

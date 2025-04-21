@@ -59,7 +59,7 @@ function AdminDashboard() {
             <FaTachometerAlt className="mr-2" /> Dashboard
           </Link>
           <Link
-            to="/home"
+            to="/"
             className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg"
           >
             <FaGlobe className="mr-2" /> Live Site

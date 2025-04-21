@@ -56,6 +56,8 @@ function SignUpPage() {
             });
 
             if (response.data.success) {
+                // Store user email in localStorage
+                localStorage.setItem('userEmail', formData.email);
                 setSuccess("Registration successful! Redirecting to login...");
                 // Clear form
                 setFormData({

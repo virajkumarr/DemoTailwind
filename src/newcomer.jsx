@@ -1,7 +1,36 @@
 import { Link } from "react-router-dom";
 import { FaTachometerAlt, FaGlobe, FaFileAlt, FaPhone, FaSignOutAlt, FaUserCircle } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const UserDashboard = () => {
+  const [userName, setUserName] = useState("User");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        // Get the email from localStorage (assuming you store it during login)
+        const userEmail = localStorage.getItem('userEmail');
+        if (userEmail) {
+          const response = await axios.get("http://localhost:3000/getalluser");
+          if (response.data.success) {
+            const user = response.data.users.find(user => user.email === userEmail);
+            if (user) {
+              setUserName(user.fullname);
+            }
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   return (
     <div className="mt-32 flex h-screen bg-gray-100">
 
@@ -18,9 +47,9 @@ const UserDashboard = () => {
 
         {/* User Profile */}
         <div className="flex items-center space-x-3 border-b pb-4">
-          <img src="/profile.jpeg" alt="Profile" className="w-12 h-12 rounded-full shadow-md" />
+          <img src="/adminprofile.jpg" alt="Profile" className="w-12 h-12 rounded-full shadow-md" />
           <div>
-            <h2 className="font-bold text-gray-700">Welcome, Robert</h2>
+            <h2 className="font-bold text-gray-700">Welcome, {loading ? "..." : userName}</h2>
             <p className="text-sm text-gray-500">System User</p>
           </div>
         </div>
@@ -28,7 +57,7 @@ const UserDashboard = () => {
         {/* Navigation Links */}
         <nav className="mt-6 space-y-3">
           <Link
-            to="/dashboard"
+            to="/newlogin"
             className="flex items-center p-3 bg-blue-100 text-blue-600 font-bold rounded-lg shadow-sm hover:bg-blue-200 transition"
           >
             <FaTachometerAlt className="mr-3" /> Dashboard
@@ -42,7 +71,7 @@ const UserDashboard = () => {
           </Link>
 
           <Link
-            to="/home"
+            to="/"
             className="flex items-center p-3 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition"
           >
             <FaGlobe className="mr-3" /> Live Site
@@ -56,7 +85,7 @@ const UserDashboard = () => {
           </Link>
 
           <Link
-            to="/home"
+            to="/"
             className="flex items-center space-x-2 p-2 text-red-600 hover:bg-gray-200 rounded-md"
           >
             <FaSignOutAlt />
@@ -70,7 +99,7 @@ const UserDashboard = () => {
 
         {/* Dashboard Header */}
         <div className="flex justify-between items-center bg-white p-4 shadow-md rounded-lg">
-          <h1 className="text-2xl font-bold text-gray-800">👋 Greetings, Robert!</h1>
+          <h1 className="text-2xl font-bold text-gray-800">👋 Greetings, {loading ? "..." : userName}!</h1>
           <button className="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
             User: New Comer
           </button>

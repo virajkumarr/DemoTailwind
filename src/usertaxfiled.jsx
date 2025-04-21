@@ -51,23 +51,23 @@ const Usertaxfiled = () => {
         {/* Sidebar */}
         <div className="w-64 bg-white shadow-xl border-r border-gray-300 p-6">
           <div className="flex flex-col items-center">
-            <img src="../public/profile.jpeg" alt="Liberty Tax" className="w-25 mb-4 rounded-lg shadow-md" />
+            <img src="../public/adminprofile.jpg" alt="Liberty Tax" className="w-25 mb-4 rounded-lg shadow-md" />
             <p className="text-gray-700 font-semibold">
-              Welcome <span className="font-bold">Varney Butler</span>
+               <span className="font-bold"></span>
             </p>
-            <p className="text-sm text-black-500 font-bold">User</p>
+            <p className="text-sm text-black-500 font-bold"></p>
           </div>
 
           <nav className="mt-8 space-y-4">
-            <Link to="/newcomer" className="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-100 transition">
+            <Link to="/newlogin" className="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-100 transition">
               <FaTachometerAlt className="text-lg" /> <span className="font-medium">Dashboard</span>
             </Link>
 
-            <Link to="/home" className="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-100 transition">
+            <Link to="/" className="flex items-center space-x-3 p-3 rounded-lg text-gray-700 hover:bg-blue-100 transition">
               <FaGlobe className="text-lg" /> <span className="font-medium">Live Site</span>
             </Link>
 
-            <Link to="/home" className="flex items-center space-x-3 p-3 rounded-lg text-red-600 font-bold hover:bg-red-100 transition">
+            <Link to="/" className="flex items-center space-x-3 p-3 rounded-lg text-red-600 font-bold hover:bg-red-100 transition">
               <FaSignOutAlt className="text-lg" /> <span>Logout</span>
             </Link>
           </nav>

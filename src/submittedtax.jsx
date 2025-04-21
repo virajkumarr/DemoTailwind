@@ -79,10 +79,10 @@ function SubmittedTax() {
           <Link to="/admin" className="flex items-center text-green-600 font-bold p-2 hover:bg-green-100 rounded-lg">
             <FaTachometerAlt className="mr-2" /> Dashboard
           </Link>
-          <Link to="/home" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
+          <Link to="/" className="flex items-center text-gray-700 hover:text-blue-500 p-2 hover:bg-gray-100 rounded-lg">
             <FaGlobe className="mr-2" /> Live Site
           </Link>
-          <Link to="/logout" className="flex items-center text-red-500 font-bold p-2 hover:bg-red-100 rounded-lg">
+          <Link to="/" className="flex items-center text-red-500 font-bold p-2 hover:bg-red-100 rounded-lg">
             <FaSignOutAlt className="mr-2" /> Logout
           </Link>
         </nav>
